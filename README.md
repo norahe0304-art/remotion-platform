@@ -31,7 +31,8 @@ Quick Start (1 minute): [EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTART.m
 ## 0. First-time setup
 
 ```bash
-cd "/Users/nora/Desktop/pinpoint migration/remotion-platform"
+git clone https://github.com/norahe0304-art/remotion-platform.git
+cd remotion-platform
 npm install
 ```
 

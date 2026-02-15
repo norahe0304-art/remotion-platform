@@ -8,7 +8,8 @@ Language: [English](./QUICKSTART.en.md) | [简体中文](./QUICKSTART.md)
 
 1. Open terminal and enter project
 ```bash
-cd "/Users/nora/Desktop/pinpoint migration/remotion-platform"
+git clone https://github.com/norahe0304-art/remotion-platform.git
+cd remotion-platform
 ```
 
 2. Sync latest prompts (incremental)

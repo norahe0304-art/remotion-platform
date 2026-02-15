@@ -8,7 +8,8 @@ Language: [English](./QUICKSTART.en.md) | [简体中文](./QUICKSTART.md)
 
 1. 打开终端并进入项目
 ```bash
-cd "/Users/nora/Desktop/pinpoint migration/remotion-platform"
+git clone https://github.com/norahe0304-art/remotion-platform.git
+cd remotion-platform
 ```
 
 2. 同步最新 Prompt（增量）
