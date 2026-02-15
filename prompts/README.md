@@ -2,6 +2,8 @@
 
 Curated prompt library for Remotion ideation and production.
 
+SOP 手册入口：`/Users/nora/Desktop/pinpoint migration/remotion-platform/README.md`
+
 ## Fields required per prompt
 
 - `id`
@@ -18,6 +20,8 @@ Curated prompt library for Remotion ideation and production.
 npm run prompts:list
 npm run prompts:search -- terminal
 npm run prompts:sync
+npm run prompts:sync:since
+npm run prompts:app
 ```
 
 ## Sources
@@ -28,4 +32,17 @@ npm run prompts:sync
 ## Scheduled sync
 
 - GitHub Actions workflow: `.github/workflows/prompts-sync.yml`
-- Runs every Monday (UTC) and can be triggered manually via `workflow_dispatch`.
+- Runs daily (UTC), uses incremental sync + retry, and can be triggered manually via `workflow_dispatch`.
+
+## Browser app
+
+- Start: `npm run prompts:app`
+- Open: `http://localhost:4180/app/`
+- Features: beginner-friendly 3-step guidance, source/tag filter, keyword search, preview modal, copy prompt, copy AI template, source link.
+
+### Non-technical user flow
+
+1. Open the page and choose a source (Official / Community).
+2. Click a tag to narrow down style/category.
+3. Click "预览" to inspect full prompt.
+4. Click "复制" and paste into Codex / Claude Code.

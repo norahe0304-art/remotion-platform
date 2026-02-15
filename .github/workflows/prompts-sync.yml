@@ -3,7 +3,7 @@ name: Sync prompts
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 16 * * 1'
+    - cron: '0 16 * * *'
 
 jobs:
   sync:
@@ -17,8 +17,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Sync prompts from sources
-        run: node scripts/prompts-sync.mjs
+      - name: Sync prompts from sources (retry x3)
+        run: |
+          for i in 1 2 3; do
+            node scripts/prompts-sync.mjs --since && break
+            if [ "$i" -eq 3 ]; then
+              echo "Sync failed after 3 attempts"
+              exit 1
+            fi
+            echo "Retry in 15s..."
+            sleep 15
+          done
 
       - name: Commit changes
         run: |

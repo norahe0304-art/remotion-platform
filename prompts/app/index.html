@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Remotion Prompt 选题助手</title>
+    <style>
+      :root {
+        --bg: #071124;
+        --card: #0d1a32;
+        --line: #2c3e6d;
+        --text: #ecf2ff;
+        --muted: #9eb0dc;
+        --accent: #5e8bff;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: radial-gradient(900px 500px at 15% 10%, #11325a 0%, transparent 60%), var(--bg); color: var(--text); }
+      .wrap { max-width: 1240px; margin: 0 auto; padding: 20px; }
+      .hero { border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: rgba(10, 20, 40, .75); margin-bottom: 14px; }
+      .hero h1 { margin: 0 0 8px; font-size: 24px; }
+      .hero p { margin: 0; color: var(--muted); }
+      .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 14px; }
+      .step { border: 1px solid var(--line); border-radius: 12px; padding: 10px; background: #0b1730; }
+      .step b { display: block; margin-bottom: 4px; }
+      .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+      input, select { background: #121f3d; color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+      .count { color: var(--muted); font-size: 13px; }
+      .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+      .chip { border: 1px solid #4260a4; background: #132345; color: #c2d1f4; border-radius: 999px; padding: 5px 10px; font-size: 12px; cursor: pointer; }
+      .chip.active { background: #2a4f9d; color: #fff; border-color: #6f95ea; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+      .title { font-size: 16px; font-weight: 800; line-height: 1.4; }
+      .meta { font-size: 12px; color: var(--muted); }
+      .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+      .tag { border: 1px solid #3f568f; color: #b8c8ee; font-size: 11px; border-radius: 999px; padding: 3px 8px; }
+      .prompt { min-height: 58px; color: #dbe5ff; font-size: 13px; line-height: 1.45; }
+      .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+      button, a.btn { border: 1px solid #5070b7; background: #193260; color: #eef4ff; border-radius: 10px; font-size: 13px; padding: 8px 10px; cursor: pointer; text-decoration: none; }
+      .empty { border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); padding: 18px; background: #0a152a; }
+      .modal { position: fixed; inset: 0; background: rgba(2, 7, 16, .75); display: none; align-items: center; justify-content: center; padding: 18px; }
+      .modal.open { display: flex; }
+      .modal-body { width: min(980px, 96vw); max-height: 92vh; overflow: auto; border: 1px solid var(--line); border-radius: 14px; background: #0b1831; padding: 14px; }
+      .modal-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 8px; }
+      .mono { white-space: pre-wrap; font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.5; border: 1px solid #2e4378; border-radius: 12px; background: #0f203f; padding: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <h1>Remotion Prompt 选题助手</h1>
+        <p>给非技术用户的版本：先筛选，再预览，再复制给 AI。全程不需要改代码。</p>
+        <div class="steps">
+          <div class="step">
+            <b>1. 先选类型</b>
+            在“来源 / 标签”里缩小范围，比如 UI Demo、Image Animation。
+          </div>
+          <div class="step">
+            <b>2. 预览完整 Prompt</b>
+            点“预览”确认语气和结构是否适合你的项目。
+          </div>
+          <div class="step">
+            <b>3. 一键复制直接用</b>
+            点“复制”，把文本发给 Codex / Claude Code 即可开始生成。
+          </div>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <input id="q" placeholder="搜关键词（如：terminal / product / map）" size="34" />
+        <select id="source">
+          <option value="">全部来源</option>
+          <option value="remotion-dev">官方 remotion.dev</option>
+          <option value="manalkaff">社区 manalkaff</option>
+        </select>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="chips" id="tagPanel"></div>
+      <div id="grid" class="grid"></div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-body">
+        <div class="modal-head">
+          <strong id="modalTitle"></strong>
+          <div class="actions">
+            <button id="modalCopy">复制 Prompt</button>
+            <button id="modalCopyAi">复制 AI 模板</button>
+            <a id="modalSource" class="btn" href="#" target="_blank" rel="noreferrer">查看来源</a>
+            <button id="modalClose">关闭</button>
+          </div>
+        </div>
+        <div id="modalMeta" class="meta"></div>
+        <p class="meta">建议用法：复制后补一句你的业务目标和素材路径，再发给 AI。</p>
+        <div id="modalPrompt" class="mono"></div>
+      </div>
+    </div>
+
+    <script>
+      const state = { items: [], q: '', source: '', tag: '' };
+      const q = document.getElementById('q');
+      const source = document.getElementById('source');
+      const tagPanel = document.getElementById('tagPanel');
+      const grid = document.getElementById('grid');
+      const count = document.getElementById('count');
+      const modal = document.getElementById('modal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalMeta = document.getElementById('modalMeta');
+      const modalPrompt = document.getElementById('modalPrompt');
+      const modalSource = document.getElementById('modalSource');
+      const modalCopy = document.getElementById('modalCopy');
+      const modalCopyAi = document.getElementById('modalCopyAi');
+      const modalClose = document.getElementById('modalClose');
+
+      const esc = (s = '') => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      const sourceOf = (item) => item.id.startsWith('remotion-dev-') ? 'remotion-dev' : item.id.startsWith('manalkaff-') ? 'manalkaff' : 'manual';
+      const sourceLabel = (src) => src === 'remotion-dev' ? '官方' : src === 'manalkaff' ? '社区' : '手动';
+      const buildAiTemplate = (item) => {
+        return [
+          '请基于以下 Remotion Prompt 生成可执行的视频实现方案。',
+          '',
+          '[我的目标]',
+          '- 请先用 1-2 句话复述你理解的目标。',
+          '- 如果有缺失信息，请先给出最小问题清单（不超过 3 个）。',
+          '',
+          '[实现要求]',
+          '- 输出可落地的 scene-by-scene 拆分。',
+          '- 给出关键动画/转场建议（可读性优先）。',
+          '- 给出素材清单（图片、音频、字体、图标）。',
+          '- 给出可直接执行的下一步命令。',
+          '',
+          '[可替换信息]',
+          '- 品牌/主题：<在这里填>',
+          '- 视频时长：<在这里填>',
+          '- 主要受众：<在这里填>',
+          '',
+          '[Prompt 标题]',
+          item.title || '',
+          '',
+          '[Prompt 正文]',
+          item.prompt || '',
+          '',
+          '[来源]',
+          item.source_url || '',
+        ].join('\n');
+      };
+
+      const openModal = (item) => {
+        modalTitle.textContent = item.title;
+        modalMeta.textContent = `${item.author || 'unknown'} · ${sourceLabel(sourceOf(item))}`;
+        modalPrompt.textContent = item.prompt || '';
+        modalSource.href = item.source_url || '#';
+        modalCopy.onclick = async () => {
+          await navigator.clipboard.writeText(item.prompt || '');
+          modalCopy.textContent = '已复制';
+          setTimeout(() => (modalCopy.textContent = '复制 Prompt'), 900);
+        };
+        modalCopyAi.onclick = async () => {
+          await navigator.clipboard.writeText(buildAiTemplate(item));
+          modalCopyAi.textContent = '已复制';
+          setTimeout(() => (modalCopyAi.textContent = '复制 AI 模板'), 900);
+        };
+        modal.classList.add('open');
+      };
+
+      const closeModal = () => modal.classList.remove('open');
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+      const renderTags = () => {
+        const tagCount = new Map();
+        for (const item of state.items) {
+          for (const t of item.tags || []) tagCount.set(t, (tagCount.get(t) || 0) + 1);
+        }
+        const topTags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
+        tagPanel.innerHTML = [
+          `<button class="chip ${state.tag ? '' : 'active'}" data-tag="">全部标签</button>`,
+          ...topTags.map(([tag, n]) => `<button class="chip ${state.tag === tag ? 'active' : ''}" data-tag="${esc(tag)}">${esc(tag)} (${n})</button>`),
+        ].join('');
+        tagPanel.querySelectorAll('[data-tag]').forEach((el) => {
+          el.addEventListener('click', () => {
+            state.tag = el.getAttribute('data-tag') || '';
+            render();
+            renderTags();
+          });
+        });
+      };
+
+      const render = () => {
+        const term = state.q.trim().toLowerCase();
+        const rows = state.items.filter((item) => {
+          const bySource = !state.source || sourceOf(item) === state.source;
+          const byTag = !state.tag || (item.tags || []).includes(state.tag);
+          const hay = `${item.title} ${(item.tags || []).join(' ')} ${item.prompt}`.toLowerCase();
+          const byTerm = !term || hay.includes(term);
+          return bySource && byTag && byTerm;
+        });
+
+        count.textContent = `已显示 ${rows.length} / 共 ${state.items.length}`;
+        if (rows.length === 0) {
+          grid.innerHTML = `<div class="empty">没找到匹配项。建议：清空标签，或者换个关键词试试。</div>`;
+          return;
+        }
+
+        grid.innerHTML = rows.map((item) => {
+          const text = (item.prompt || '').slice(0, 180);
+          const preview = text + ((item.prompt || '').length > 180 ? '...' : '');
+          return `
+            <article class="card">
+              <div class="title">${esc(item.title)}</div>
+              <div class="meta">${esc(item.author || 'unknown')} · ${sourceLabel(sourceOf(item))}</div>
+              <div class="tags">${(item.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+              <div class="prompt">${esc(preview)}</div>
+              <div class="actions">
+                <button data-preview="${encodeURIComponent(item.id)}">预览</button>
+                <button data-copy="${encodeURIComponent(item.prompt || '')}">复制</button>
+                <button data-copy-ai="${encodeURIComponent(item.id)}">复制 AI 模板</button>
+                <a class="btn" href="${esc(item.source_url || '#')}" target="_blank" rel="noreferrer">来源</a>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        grid.querySelectorAll('button[data-copy]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const value = decodeURIComponent(btn.getAttribute('data-copy') || '');
+            await navigator.clipboard.writeText(value);
+            btn.textContent = '已复制';
+            setTimeout(() => (btn.textContent = '复制'), 900);
+          });
+        });
+
+        grid.querySelectorAll('button[data-preview]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const id = decodeURIComponent(btn.getAttribute('data-preview') || '');
+            const item = state.items.find((it) => it.id === id);
+            if (item) openModal(item);
+          });
+        });
+        grid.querySelectorAll('button[data-copy-ai]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const id = decodeURIComponent(btn.getAttribute('data-copy-ai') || '');
+            const item = state.items.find((it) => it.id === id);
+            if (!item) return;
+            await navigator.clipboard.writeText(buildAiTemplate(item));
+            btn.textContent = '已复制';
+            setTimeout(() => (btn.textContent = '复制 AI 模板'), 900);
+          });
+        });
+      };
+
+      q.addEventListener('input', () => { state.q = q.value; render(); });
+      source.addEventListener('change', () => { state.source = source.value; render(); });
+
+      fetch('../index.json')
+        .then((r) => r.json())
+        .then((data) => {
+          state.items = data;
+          renderTags();
+          render();
+        })
+        .catch((err) => {
+          grid.innerHTML = `<div class="empty">加载失败：${esc(String(err))}</div>`;
+        });
+    </script>
+  </body>
+</html>
