@@ -24,8 +24,8 @@ npm run prompts:app
 4. In the web app:
 - choose source (official/community)
 - choose tags
-- click `预览` (Preview)
-- click `复制 AI 模板` (Copy AI Template)
+- click `Preview`
+- click `Copy AI Template`
 
 5. Send template to AI and fill 3 fields
 - brand/theme

@@ -62,8 +62,8 @@ Open in browser: `http://localhost:4180/app/`
 In the app:
 1. Choose source (Official / Community)
 2. Filter by tags and keywords
-3. Click `预览` (Preview)
-4. Click `复制 AI 模板` (Copy AI Template)
+3. Click `Preview`
+4. Click `Copy AI Template`
 
 ---
 
