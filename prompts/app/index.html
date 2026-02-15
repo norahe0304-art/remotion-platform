@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Remotion Prompt 选题助手</title>
+    <title>Remotion Prompt Picker</title>
     <style>
       :root {
         --bg: #071124;
@@ -48,30 +48,30 @@
   <body>
     <div class="wrap">
       <section class="hero">
-        <h1>Remotion Prompt 选题助手</h1>
-        <p>给非技术用户的版本：先筛选，再预览，再复制给 AI。全程不需要改代码。</p>
+        <h1>Remotion Prompt Picker</h1>
+        <p>Built for non-technical users: filter first, preview, then copy to AI. No coding required.</p>
         <div class="steps">
           <div class="step">
-            <b>1. 先选类型</b>
-            在“来源 / 标签”里缩小范围，比如 UI Demo、Image Animation。
+            <b>1. Choose source and style</b>
+            Narrow down with source and tags (for example UI Demo or Image Animation).
           </div>
           <div class="step">
-            <b>2. 预览完整 Prompt</b>
-            点“预览”确认语气和结构是否适合你的项目。
+            <b>2. Preview the full prompt</b>
+            Click Preview to check tone and structure for your project.
           </div>
           <div class="step">
-            <b>3. 一键复制直接用</b>
-            点“复制”，把文本发给 Codex / Claude Code 即可开始生成。
+            <b>3. Copy and run</b>
+            Copy the text and send it to Codex or Claude Code.
           </div>
         </div>
       </section>
 
       <div class="toolbar">
-        <input id="q" placeholder="搜关键词（如：terminal / product / map）" size="34" />
+        <input id="q" placeholder="Search keywords (for example terminal / product / map)" size="34" />
         <select id="source">
-          <option value="">全部来源</option>
-          <option value="remotion-dev">官方 remotion.dev</option>
-          <option value="manalkaff">社区 manalkaff</option>
+          <option value="">All sources</option>
+          <option value="remotion-dev">Official remotion.dev</option>
+          <option value="manalkaff">Community manalkaff</option>
         </select>
         <span class="count" id="count"></span>
       </div>
@@ -84,14 +84,14 @@
         <div class="modal-head">
           <strong id="modalTitle"></strong>
           <div class="actions">
-            <button id="modalCopy">复制 Prompt</button>
-            <button id="modalCopyAi">复制 AI 模板</button>
-            <a id="modalSource" class="btn" href="#" target="_blank" rel="noreferrer">查看来源</a>
-            <button id="modalClose">关闭</button>
+            <button id="modalCopy">Copy Prompt</button>
+            <button id="modalCopyAi">Copy AI Template</button>
+            <a id="modalSource" class="btn" href="#" target="_blank" rel="noreferrer">Open Source</a>
+            <button id="modalClose">Close</button>
           </div>
         </div>
         <div id="modalMeta" class="meta"></div>
-        <p class="meta">建议用法：复制后补一句你的业务目标和素材路径，再发给 AI。</p>
+        <p class="meta">Tip: After copying, add your business goal and asset paths before sending to AI.</p>
         <div id="modalPrompt" class="mono"></div>
       </div>
     </div>
@@ -114,33 +114,33 @@
 
       const esc = (s = '') => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       const sourceOf = (item) => item.id.startsWith('remotion-dev-') ? 'remotion-dev' : item.id.startsWith('manalkaff-') ? 'manalkaff' : 'manual';
-      const sourceLabel = (src) => src === 'remotion-dev' ? '官方' : src === 'manalkaff' ? '社区' : '手动';
+      const sourceLabel = (src) => src === 'remotion-dev' ? 'Official' : src === 'manalkaff' ? 'Community' : 'Manual';
       const buildAiTemplate = (item) => {
         return [
-          '请基于以下 Remotion Prompt 生成可执行的视频实现方案。',
+          'Please build an executable Remotion implementation plan based on the prompt below.',
           '',
-          '[我的目标]',
-          '- 请先用 1-2 句话复述你理解的目标。',
-          '- 如果有缺失信息，请先给出最小问题清单（不超过 3 个）。',
+          '[Goal]',
+          '- Restate your understanding of the goal in 1-2 sentences.',
+          '- If information is missing, ask no more than 3 critical questions.',
           '',
-          '[实现要求]',
-          '- 输出可落地的 scene-by-scene 拆分。',
-          '- 给出关键动画/转场建议（可读性优先）。',
-          '- 给出素材清单（图片、音频、字体、图标）。',
-          '- 给出可直接执行的下一步命令。',
+          '[Implementation Requirements]',
+          '- Provide a practical scene-by-scene breakdown.',
+          '- Recommend key animation and transition choices (readability first).',
+          '- Provide an asset checklist (image, audio, font, icon).',
+          '- Provide concrete next commands to run.',
           '',
-          '[可替换信息]',
-          '- 品牌/主题：<在这里填>',
-          '- 视频时长：<在这里填>',
-          '- 主要受众：<在这里填>',
+          '[Replaceable Inputs]',
+          '- Brand/Theme: <fill here>',
+          '- Video Duration: <fill here>',
+          '- Target Audience: <fill here>',
           '',
-          '[Prompt 标题]',
+          '[Prompt Title]',
           item.title || '',
           '',
-          '[Prompt 正文]',
+          '[Prompt Text]',
           item.prompt || '',
           '',
-          '[来源]',
+          '[Source]',
           item.source_url || '',
         ].join('\n');
       };
@@ -152,13 +152,13 @@
         modalSource.href = item.source_url || '#';
         modalCopy.onclick = async () => {
           await navigator.clipboard.writeText(item.prompt || '');
-          modalCopy.textContent = '已复制';
-          setTimeout(() => (modalCopy.textContent = '复制 Prompt'), 900);
+          modalCopy.textContent = 'Copied';
+          setTimeout(() => (modalCopy.textContent = 'Copy Prompt'), 900);
         };
         modalCopyAi.onclick = async () => {
           await navigator.clipboard.writeText(buildAiTemplate(item));
-          modalCopyAi.textContent = '已复制';
-          setTimeout(() => (modalCopyAi.textContent = '复制 AI 模板'), 900);
+          modalCopyAi.textContent = 'Copied';
+          setTimeout(() => (modalCopyAi.textContent = 'Copy AI Template'), 900);
         };
         modal.classList.add('open');
       };
@@ -174,7 +174,7 @@
         }
         const topTags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
         tagPanel.innerHTML = [
-          `<button class="chip ${state.tag ? '' : 'active'}" data-tag="">全部标签</button>`,
+          `<button class="chip ${state.tag ? '' : 'active'}" data-tag="">All tags</button>`,
           ...topTags.map(([tag, n]) => `<button class="chip ${state.tag === tag ? 'active' : ''}" data-tag="${esc(tag)}">${esc(tag)} (${n})</button>`),
         ].join('');
         tagPanel.querySelectorAll('[data-tag]').forEach((el) => {
@@ -196,9 +196,9 @@
           return bySource && byTag && byTerm;
         });
 
-        count.textContent = `已显示 ${rows.length} / 共 ${state.items.length}`;
+        count.textContent = `Showing ${rows.length} / ${state.items.length}`;
         if (rows.length === 0) {
-          grid.innerHTML = `<div class="empty">没找到匹配项。建议：清空标签，或者换个关键词试试。</div>`;
+          grid.innerHTML = `<div class="empty">No matches found. Try clearing tag filters or changing the keyword.</div>`;
           return;
         }
 
@@ -212,10 +212,10 @@
               <div class="tags">${(item.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
               <div class="prompt">${esc(preview)}</div>
               <div class="actions">
-                <button data-preview="${encodeURIComponent(item.id)}">预览</button>
-                <button data-copy="${encodeURIComponent(item.prompt || '')}">复制</button>
-                <button data-copy-ai="${encodeURIComponent(item.id)}">复制 AI 模板</button>
-                <a class="btn" href="${esc(item.source_url || '#')}" target="_blank" rel="noreferrer">来源</a>
+                <button data-preview="${encodeURIComponent(item.id)}">Preview</button>
+                <button data-copy="${encodeURIComponent(item.prompt || '')}">Copy</button>
+                <button data-copy-ai="${encodeURIComponent(item.id)}">Copy AI Template</button>
+                <a class="btn" href="${esc(item.source_url || '#')}" target="_blank" rel="noreferrer">Source</a>
               </div>
             </article>
           `;
@@ -225,8 +225,8 @@
           btn.addEventListener('click', async () => {
             const value = decodeURIComponent(btn.getAttribute('data-copy') || '');
             await navigator.clipboard.writeText(value);
-            btn.textContent = '已复制';
-            setTimeout(() => (btn.textContent = '复制'), 900);
+            btn.textContent = 'Copied';
+            setTimeout(() => (btn.textContent = 'Copy'), 900);
           });
         });
 
@@ -243,8 +243,8 @@
             const item = state.items.find((it) => it.id === id);
             if (!item) return;
             await navigator.clipboard.writeText(buildAiTemplate(item));
-            btn.textContent = '已复制';
-            setTimeout(() => (btn.textContent = '复制 AI 模板'), 900);
+            btn.textContent = 'Copied';
+            setTimeout(() => (btn.textContent = 'Copy AI Template'), 900);
           });
         });
       };
@@ -260,7 +260,7 @@
           render();
         })
         .catch((err) => {
-          grid.innerHTML = `<div class="empty">加载失败：${esc(String(err))}</div>`;
+          grid.innerHTML = `<div class="empty">Load failed: ${esc(String(err))}</div>`;
         });
     </script>
   </body>

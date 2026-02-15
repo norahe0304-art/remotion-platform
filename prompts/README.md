@@ -44,5 +44,5 @@ npm run prompts:app
 
 1. Open the page and choose a source (Official / Community).
 2. Click a tag to narrow down style/category.
-3. Click "预览" to inspect full prompt.
-4. Click "复制" and paste into Codex / Claude Code.
+3. Click "Preview" to inspect full prompt.
+4. Click "Copy AI Template" (or "Copy") and paste into Codex / Claude Code.

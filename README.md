@@ -70,7 +70,7 @@ In the app:
 ## 3. Standard input for a new video request
 
 After copying AI template, fill at least:
-- Brand/theme (e.g. ProNetX dark-tech)
+- Brand/theme (e.g. Pronetx dark-tech)
 - Video length (e.g. 60s)
 - Target audience (e.g. AWS migration PM)
 

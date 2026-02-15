@@ -70,7 +70,7 @@ npm run prompts:app
 ## 3. 发起“新视频”标准输入（给 AI）
 
 把“复制 AI 模板”得到的文本补全这三项：
-- 品牌/主题（例如：ProNetX dark-tech）
+- 品牌/主题（例如：Pronetx dark-tech）
 - 视频时长（例如：60s）
 - 主要受众（例如：AWS migration PM）
 
