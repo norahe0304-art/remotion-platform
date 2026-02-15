@@ -17,4 +17,15 @@ Curated prompt library for Remotion ideation and production.
 ```bash
 npm run prompts:list
 npm run prompts:search -- terminal
+npm run prompts:sync
 ```
+
+## Sources
+
+- https://www.remotion.dev/prompts
+- https://github.com/manalkaff/remotion-prompts
+
+## Scheduled sync
+
+- GitHub Actions workflow: `.github/workflows/prompts-sync.yml`
+- Runs every Monday (UTC) and can be triggered manually via `workflow_dispatch`.
