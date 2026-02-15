@@ -1,0 +1,14 @@
+{
+  "name": "remotion-template-nora",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "echo \"Wire this template to a Remotion app entrypoint\"",
+    "check": "echo \"Template check placeholder\""
+  },
+  "dependencies": {
+    "@nora/remotion-controls": "0.1.0",
+    "@nora/remotion-styles": "0.1.0"
+  }
+}

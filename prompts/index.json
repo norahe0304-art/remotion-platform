@@ -1,0 +1,20 @@
+[
+  {
+    "id": "terminal-proof-dark-tech",
+    "title": "Terminal Proof Narrative",
+    "tags": ["terminal", "proof", "dark-tech"],
+    "prompt": "Create a dark-tech sequence where a CLI command appears as proof, with restrained code rain and strong readability.",
+    "source_url": "https://www.remotion.dev/prompts",
+    "author": "remotion-community",
+    "usage_note": "Use as inspiration; adapt copy and pacing to brand voice."
+  },
+  {
+    "id": "two-path-comparison",
+    "title": "Two Path Comparison",
+    "tags": ["comparison", "split", "decision"],
+    "prompt": "Visualize two diverging paths with clear emotional contrast and subtle motion, prioritizing legibility.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts",
+    "author": "community",
+    "usage_note": "Verify source license/terms before direct commercial reuse."
+  }
+]
