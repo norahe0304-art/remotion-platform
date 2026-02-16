@@ -2,8 +2,6 @@
 
 Remotion production platform for building shippable videos fast (Prompt library + branding styles + timeline controls).
 
-Language: [English](./README.md) | [简体中文](./README.zh-CN.md)
-
 ## Who this is for
 
 - Marketing/Ops: Start a new video request without coding.
@@ -30,22 +28,13 @@ Quick Start (1 minute): [EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTART.m
 
 ## 0. First-time setup
 
-Default for end users (no repo clone):
+Start here (no repo clone):
 
 ```bash
 npx -y @norahe/remotion-workflow init --project-name my-video
 cd my-video
 npm install
 npm run dev
-```
-
-Maintainer path (when you need to work on this monorepo itself):
-
-```bash
-git clone https://github.com/norahe0304-art/remotion-platform.git
-cd remotion-platform
-npm install
-npm run workflow:init
 ```
 
 ---
