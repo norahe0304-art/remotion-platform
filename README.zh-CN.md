@@ -30,25 +30,23 @@ Quick Start（1分钟）：[EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTAR
 
 ## 0. 首次准备（一次就好）
 
+终端用户默认路径（不克隆仓库）：
+
+```bash
+npx -y @norahe/remotion-workflow init --project-name my-video
+cd my-video
+npm install
+npm run dev
+```
+
+维护者路径（需要改这个 monorepo 本身时）：
+
 ```bash
 git clone https://github.com/norahe0304-art/remotion-platform.git
 cd remotion-platform
 npm install
-```
-
-工作流统一入口（在本仓库内）：
-
-```bash
 npm run workflow:init
 ```
-
-未来发布后的公共用法：
-
-```bash
-npx -y @norahe/remotion-workflow init
-```
-
-发布后，终端用户无需克隆整仓库即可使用。
 
 ---
 

@@ -30,25 +30,23 @@ Quick Start (1 minute): [EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTART.m
 
 ## 0. First-time setup
 
+Default for end users (no repo clone):
+
+```bash
+npx -y @norahe/remotion-workflow init --project-name my-video
+cd my-video
+npm install
+npm run dev
+```
+
+Maintainer path (when you need to work on this monorepo itself):
+
 ```bash
 git clone https://github.com/norahe0304-art/remotion-platform.git
 cd remotion-platform
 npm install
-```
-
-Workflow entrypoint (inside this repo):
-
-```bash
 npm run workflow:init
 ```
-
-Future public usage (after package publish):
-
-```bash
-npx -y @norahe/remotion-workflow init
-```
-
-No full repo clone required for end users after publish.
 
 ---
 
