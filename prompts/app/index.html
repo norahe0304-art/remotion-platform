@@ -173,6 +173,34 @@
         { value: 'remotion-dev', label: 'Official' },
         { value: 'manalkaff', label: 'Community' },
       ];
+      const buildBlankTemplate = () => {
+        return [
+          'Please create a Remotion video plan from scratch using best practices.',
+          '',
+          '[Goal]',
+          '- Restate the goal in 1-2 sentences.',
+          '- Ask no more than 3 critical questions if details are missing.',
+          '',
+          '[Implementation Requirements]',
+          '- Propose a practical scene-by-scene structure.',
+          '- Suggest transitions/motion style and pacing.',
+          '- Provide required assets checklist (logo, image, audio, font, icon).',
+          '- Provide concrete next commands to run.',
+          '',
+          '[Inputs to fill]',
+          '- Brand/Theme: <fill here>',
+          '- Video Duration: <fill here>',
+          '- Target Audience: <fill here>',
+          '- Target Channel: <fill here>',
+          '- Mandatory Lines: <fill here>',
+          '',
+          '[Output expected]',
+          '- Draft script',
+          '- Scene timing map',
+          '- Visual direction',
+          '- Execution steps',
+        ].join('\n');
+      };
       const buildAiTemplate = (item) => {
         return [
           'Please build an executable Remotion implementation plan based on the prompt below.',
@@ -253,7 +281,22 @@
           return;
         }
 
-        grid.innerHTML = rows.map((item) => {
+        const blankCard = `
+          <article class="card">
+            <div class="title">Blank Template</div>
+            <div class="meta">Start from scratch</div>
+            <div class="tags">
+              <span class="tag">best-practices</span>
+              <span class="tag">scratch</span>
+            </div>
+            <div class="prompt">Copy here to start from scratch with best practices.</div>
+            <div class="actions">
+              <button data-copy-blank="1">Copy Blank Template</button>
+            </div>
+          </article>
+        `;
+
+        grid.innerHTML = blankCard + rows.map((item) => {
           const text = (item.prompt || '').slice(0, 180);
           const preview = text + ((item.prompt || '').length > 180 ? '...' : '');
           return `
@@ -270,6 +313,14 @@
             </article>
           `;
         }).join('');
+
+        grid.querySelectorAll('button[data-copy-blank]').forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            await navigator.clipboard.writeText(buildBlankTemplate());
+            btn.textContent = 'Copied';
+            setTimeout(() => (btn.textContent = 'Copy Blank Template'), 900);
+          });
+        });
 
         grid.querySelectorAll('button[data-copy]').forEach((btn) => {
           btn.addEventListener('click', async () => {
