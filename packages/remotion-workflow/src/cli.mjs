@@ -23,10 +23,32 @@ Behavior:
 const args = process.argv.slice(2);
 const command = args[0];
 
-const getArgValue = (flag) => {
-  const index = args.indexOf(flag);
-  if (index === -1) return null;
-  return args[index + 1] ?? null;
+const parseInitOptions = (argv) => {
+  const rest = argv.slice(1);
+  let projectName = null;
+
+  for (let i = 0; i < rest.length; i++) {
+    const token = rest[i];
+    if (token === '--project-name') {
+      const value = rest[i + 1];
+      if (!value || value.startsWith('--')) {
+        console.error('[workflow] Missing value for --project-name');
+        console.log('Example: remotion-workflow init --project-name my-video');
+        process.exit(1);
+      }
+      projectName = value;
+      i += 1;
+      continue;
+    }
+
+    console.error(`[workflow] Unknown argument: ${token}`);
+    console.log('Only supported option: --project-name <name>');
+    console.log('If your name has spaces, wrap it in quotes.');
+    console.log('Example: remotion-workflow init --project-name "my video"');
+    process.exit(1);
+  }
+
+  return {projectName};
 };
 
 const ensureDir = (target) => {
@@ -247,7 +269,16 @@ const createProjectIfNeeded = (cwd, projectName) => {
     console.error('[workflow] Failed to create Remotion project via create-video.');
     process.exit(result.status || 1);
   }
-  return path.join(cwd, safeName);
+  const projectDir = path.join(cwd, safeName);
+  const packagePath = path.join(projectDir, 'package.json');
+  if (!fs.existsSync(packagePath)) {
+    console.error('[workflow] Project scaffold did not produce package.json.');
+    console.error(`[workflow] Expected project directory: ${projectDir}`);
+    console.error('[workflow] Please run again, or create the project manually with:');
+    console.error(`  npx create-video@latest ${safeName}`);
+    process.exit(1);
+  }
+  return projectDir;
 };
 
 const buildGuide = (projectName) => {
@@ -308,7 +339,7 @@ if (command !== 'init') {
   process.exit(1);
 }
 
-const projectName = getArgValue('--project-name');
+const {projectName} = parseInitOptions(args);
 const cwd = process.cwd();
 const projectDir = createProjectIfNeeded(cwd, projectName);
 ensureStarterFiles(projectDir);
