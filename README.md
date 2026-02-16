@@ -13,6 +13,7 @@ npm run dev
 
 `my-video` is just an example name. Use any name you want.
 If your project name contains spaces, wrap it in quotes.
+No template selection required. This command creates the preset Nora setup directly.
 
 ## What init gives you
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * [INPUT]: process args, filesystem state, and optional create-video scaffolding.
+ * [INPUT]: process args and filesystem state.
  * [OUTPUT]: initialized workflow guide files in an existing or newly created project.
  * [POS]: CLI entrypoint for @norahe/remotion-workflow package.
  * [PROTOCOL]: update this header when code changes, then check AGENTS.md
@@ -9,7 +9,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import {spawnSync} from 'node:child_process';
 
 const HELP = `
 Usage:
@@ -17,7 +16,7 @@ Usage:
 
 Behavior:
   - If current directory already looks like a Remotion project, initialize workflow files there.
-  - Otherwise, scaffold a new Remotion project with create-video and initialize workflow files.
+  - Otherwise, scaffold a preset Nora Remotion project and initialize workflow files.
 `;
 
 const args = process.argv.slice(2);
@@ -61,6 +60,11 @@ const writeIfMissing = (filePath, content) => {
   if (fs.existsSync(filePath)) return false;
   fs.writeFileSync(filePath, content, 'utf8');
   return true;
+};
+
+const writeFile = (filePath, content) => {
+  ensureDir(path.dirname(filePath));
+  fs.writeFileSync(filePath, content, 'utf8');
 };
 
 const upsertPackageJsonDependency = (projectDir, depName, version) => {
@@ -255,27 +259,122 @@ const isRemotionProject = (cwd) => {
   }
 };
 
+const buildPackageJson = (projectName) => {
+  return JSON.stringify({
+    name: projectName,
+    version: '1.0.0',
+    private: true,
+    scripts: {
+      dev: 'remotion studio',
+      start: 'remotion studio',
+      build: 'remotion render src/index.ts NoraWorkflow-Starter out/video.mp4',
+    },
+    dependencies: {
+      react: '^19.0.0',
+      'react-dom': '^19.0.0',
+      remotion: '^4.0.366',
+      zod: '^3.25.76',
+    },
+    devDependencies: {
+      '@types/react': '^19.0.10',
+      '@types/react-dom': '^19.0.4',
+      typescript: '^5.9.2',
+    },
+  }, null, 2);
+};
+
+const buildTsConfig = () => {
+  return JSON.stringify({
+    compilerOptions: {
+      target: 'ES2022',
+      module: 'ESNext',
+      moduleResolution: 'Bundler',
+      jsx: 'react-jsx',
+      strict: true,
+      esModuleInterop: true,
+      skipLibCheck: true,
+      forceConsistentCasingInFileNames: true,
+      noEmit: true,
+      types: ['node'],
+    },
+    include: ['src', 'remotion.config.ts'],
+  }, null, 2);
+};
+
+const buildRemotionConfig = () => {
+  return [
+    "import {Config} from '@remotion/cli/config';",
+    '',
+    'Config.setVideoImageFormat("jpeg");',
+    'Config.setOverwriteOutput(true);',
+  ].join('\n');
+};
+
+const buildIndexTs = () => {
+  return [
+    "import {registerRoot} from 'remotion';",
+    "import {RemotionRoot} from './Root';",
+    '',
+    'registerRoot(RemotionRoot);',
+  ].join('\n');
+};
+
+const buildRootTsx = () => {
+  return [
+    "import React from 'react';",
+    "import {Composition} from 'remotion';",
+    '',
+    'export const RemotionRoot: React.FC = () => {',
+    '  return (',
+    '    <>',
+    '      <Composition',
+    '        id="Bootstrap"',
+    '        component={() => null}',
+    '        durationInFrames={1}',
+    '        fps={30}',
+    '        width={1920}',
+    '        height={1080}',
+    '      />',
+    '    </>',
+    '  );',
+    '};',
+  ].join('\n');
+};
+
+const scaffoldPresetProject = (projectDir, projectName) => {
+  if (fs.existsSync(projectDir)) {
+    const existing = fs.readdirSync(projectDir);
+    if (existing.length > 0) {
+      console.error(`[workflow] Target directory is not empty: ${projectDir}`);
+      console.error('[workflow] Use a new --project-name or run init in an existing Remotion project.');
+      process.exit(1);
+    }
+  } else {
+    ensureDir(projectDir);
+  }
+
+  writeFile(path.join(projectDir, 'package.json'), `${buildPackageJson(projectName)}\n`);
+  writeFile(path.join(projectDir, 'tsconfig.json'), `${buildTsConfig()}\n`);
+  writeFile(path.join(projectDir, 'remotion.config.ts'), `${buildRemotionConfig()}\n`);
+  writeFile(path.join(projectDir, 'src', 'index.ts'), `${buildIndexTs()}\n`);
+  writeFile(path.join(projectDir, 'src', 'Root.tsx'), `${buildRootTsx()}\n`);
+  writeIfMissing(
+    path.join(projectDir, '.gitignore'),
+    ['node_modules', 'out', '.DS_Store'].join('\n') + '\n'
+  );
+};
+
 const createProjectIfNeeded = (cwd, projectName) => {
   if (isRemotionProject(cwd)) return cwd;
   const safeName = projectName || 'my-video';
   console.log(`[workflow] No Remotion project found in ${cwd}`);
-  console.log(`[workflow] Creating a new Remotion project: ${safeName}`);
-  const result = spawnSync(
-    'npx',
-    ['create-video@latest', safeName],
-    {stdio: 'inherit', cwd}
-  );
-  if (result.status !== 0) {
-    console.error('[workflow] Failed to create Remotion project via create-video.');
-    process.exit(result.status || 1);
-  }
+  console.log(`[workflow] Creating preset Nora Remotion project: ${safeName}`);
   const projectDir = path.join(cwd, safeName);
+  scaffoldPresetProject(projectDir, safeName);
   const packagePath = path.join(projectDir, 'package.json');
   if (!fs.existsSync(packagePath)) {
-    console.error('[workflow] Project scaffold did not produce package.json.');
+    console.error('[workflow] Project scaffold failed: package.json not found.');
     console.error(`[workflow] Expected project directory: ${projectDir}`);
-    console.error('[workflow] Please run again, or create the project manually with:');
-    console.error(`  npx create-video@latest ${safeName}`);
     process.exit(1);
   }
   return projectDir;
