@@ -21,6 +21,7 @@ No template selection required. This command creates the preset Nora setup direc
 - Workflow guide: `.nora-remotion-workflow/WORKFLOW.md`
 - Starter controls (`schema + defaultProps`) in `src/NoraWorkflow/*`
 - Starter composition in `src/Root.tsx`
+- In Studio, select `NoraWorkflow-Starter` to see the full right-side Props panel
 
 ## 2) Pick a prompt
 
