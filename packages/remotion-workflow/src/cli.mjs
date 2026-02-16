@@ -273,7 +273,7 @@ const buildPackageJson = (projectName) => {
       react: '^19.0.0',
       'react-dom': '^19.0.0',
       remotion: '^4.0.366',
-      zod: '^3.25.76',
+      zod: '3.22.3',
     },
     devDependencies: {
       '@remotion/cli': '^4.0.366',
@@ -436,7 +436,7 @@ const cwd = process.cwd();
 const projectDir = createProjectIfNeeded(cwd, projectName);
 ensureStarterFiles(projectDir);
 const rootUpdated = ensureStarterInRoot(projectDir);
-const zodAdded = upsertPackageJsonDependency(projectDir, 'zod', '^3.25.76');
+const zodAdded = upsertPackageJsonDependency(projectDir, 'zod', '3.22.3');
 ensureWorkflowFiles(projectDir);
 if (rootUpdated) {
   console.log('[workflow] Added NoraWorkflow starter composition to src/Root.tsx');
@@ -445,3 +445,5 @@ if (zodAdded) {
   console.log('[workflow] Added dependency: zod');
 }
 console.log(`[workflow] Done. Use project: ${projectDir}`);
+console.log('[workflow] Successfully set up. Now pick a prompt to create your video.');
+console.log('[workflow] Prompt library (best practices): https://prompts-mauve.vercel.app/app/');
