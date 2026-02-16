@@ -1,6 +1,6 @@
 {
-  "name": "@nora/remotion-workflow",
-  "version": "0.1.0",
+  "name": "@norahe/remotion-workflow",
+  "version": "0.1.1",
   "type": "module",
   "description": "Workflow CLI for using Nora Remotion process in existing or new projects.",
   "bin": {

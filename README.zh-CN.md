@@ -45,7 +45,7 @@ npm run workflow:init
 未来发布后的公共用法：
 
 ```bash
-npx @nora/remotion-workflow init
+npx -y @norahe/remotion-workflow init
 ```
 
 发布后，终端用户无需克隆整仓库即可使用。
@@ -101,6 +101,7 @@ npm run prompts:app
 使用 `workflow init` 时会自动分流：
 - 如果当前目录已是 Remotion 项目：直接在当前项目注入 workflow 文件。
 - 如果不是：先通过 `create-video` 创建官方 Remotion 项目，再自动注入 workflow 文件。
+- 两条路径都会自动注入 Studio 右侧可调控项（`schema + defaultProps` 到 `src/NoraWorkflow/*`），并在 `src/Root.tsx` 注册 `NoraWorkflow-Starter` composition。
 
 手动默认路径（需要时）：
 
@@ -183,7 +184,7 @@ npm run workflow:init
 
 ## 分发模型
 
-- 终端用户（不克隆仓库）：`npx @nora/remotion-workflow init`
+- 终端用户（不克隆仓库）：`npx @norahe/remotion-workflow init`
 - 已有项目：在项目根目录执行同一命令。
 - 新项目：CLI 先创建官方 Remotion 项目，再自动初始化 workflow。
 

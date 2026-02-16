@@ -45,7 +45,7 @@ npm run workflow:init
 Future public usage (after package publish):
 
 ```bash
-npx @nora/remotion-workflow init
+npx -y @norahe/remotion-workflow init
 ```
 
 No full repo clone required for end users after publish.
@@ -101,6 +101,7 @@ Recommended extras:
 With `workflow init`, behavior is automatic:
 - If current directory is already a Remotion project: initialize workflow files in place.
 - If not: create a new official Remotion project via `create-video`, then initialize workflow files.
+- In both paths: inject starter Studio controls (`schema + defaultProps`) into `src/NoraWorkflow/*` and register a `NoraWorkflow-Starter` composition in `src/Root.tsx`.
 
 Manual default path (if needed):
 
@@ -172,7 +173,7 @@ npm run workflow:init
 
 ## Distribution model
 
-- End users (no repo clone): `npx @nora/remotion-workflow init`
+- End users (no repo clone): `npx @norahe/remotion-workflow init`
 - Existing projects: run the same command in project root.
 - New projects: CLI creates an official Remotion project, then initializes workflow.
 
