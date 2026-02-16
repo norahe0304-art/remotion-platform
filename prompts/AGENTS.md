@@ -3,6 +3,7 @@
 
 Members
 - README.md: Prompt library usage and metadata rules.
+- .gitignore: Local deployment metadata ignore list (currently `.vercel`).
 - index.json: Aggregated prompt index synced from remotion.dev and manalkaff sources.
 - app/index.html: Minimal browser UI for filter/search/preview/copy workflows.
 - library/: Optional long-form prompt notes and categorized collections.

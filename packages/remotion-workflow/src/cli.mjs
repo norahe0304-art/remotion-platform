@@ -257,7 +257,7 @@ const buildGuide = (projectName) => {
     `Project: ${projectName}`,
     '',
     '1) Prompt selection',
-    '- Open prompt browser: https://github.com/norahe0304-art/remotion-platform (see prompts app docs)',
+    '- Open prompt browser: https://prompts-mauve.vercel.app/app/',
     '- Copy either `Copy AI Template` (prompt-based) or `Copy Input Guide` (blank from scratch).',
     '',
     '2) Input location',
