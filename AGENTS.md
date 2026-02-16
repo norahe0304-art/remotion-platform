@@ -2,7 +2,7 @@
 > L1 | Parent: /Users/nora/Desktop/pinpoint migration/AGENTS.md
 
 <directory>
-docs/ - Quickstart SOP docs for non-technical users (ZH/EN)
+docs/ - Quickstart SOP docs for non-technical users (EN)
 packages/remotion-controls/ - Shared controls schema and timeline computation helpers
 packages/remotion-prompts/ - Installable prompt dataset and input-guide helpers
 packages/remotion-styles/ - Shared branding and motion style system
@@ -16,4 +16,4 @@ Rules:
 - Keep packages focused and framework-agnostic where possible.
 - `remotion-styles` owns brand look and motion tokens, not story presets.
 - Prompt entries must include source attribution fields.
-- Top-level docs are bilingual: `README.md` (EN) and `README.zh-CN.md` (ZH).
+- Top-level docs are English-only: `README.md` and `docs/QUICKSTART.en.md`.

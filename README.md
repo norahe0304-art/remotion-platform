@@ -12,7 +12,7 @@ Remotion production platform for building shippable videos fast (Prompt library 
 
 Run workflow init -> Pick prompt -> Copy template -> Fill inputs in AI chat -> Generate v1 -> Sync A/V -> Export final.
 
-Quick Start (1 minute): [EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTART.md)
+Quick Start (1 minute): [./docs/QUICKSTART.en.md](./docs/QUICKSTART.en.md)
 
 ---
 
@@ -161,7 +161,6 @@ npm run workflow:init
 
 ## Distribution model
 
-- End users (no repo clone): `npx -y @norahe/remotion-workflow init`
 - End users (no repo clone): `npx -y @norahe/remotion-workflow init`
 - Existing projects: run the same command in project root.
 - New projects: CLI creates an official Remotion project, then initializes workflow.

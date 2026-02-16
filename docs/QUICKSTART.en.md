@@ -2,8 +2,6 @@
 
 Audience: Non-technical users who want to start a new video fast.
 
-Language: [English](./QUICKSTART.en.md) | [简体中文](./QUICKSTART.md)
-
 ## Do these 7 steps
 
 1. Create a video project (no repo clone)
