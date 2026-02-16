@@ -1,7 +1,21 @@
 # remotion-template-nora
 
-Starter template consuming:
+Runnable starter template consuming:
 - `@nora/remotion-controls`
 - `@nora/remotion-styles`
 
-Copy this template for new video projects and wire composition files.
+## Run
+
+```bash
+npm install
+npm run compositions
+npm run start
+```
+
+## Render demo
+
+```bash
+npm run build
+```
+
+This template ships with a ready composition `TemplateDemo` in `src/TemplateDemo.tsx`.

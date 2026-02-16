@@ -1,0 +1,17 @@
+{
+  "name": "@nora/remotion-prompts",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Prompt dataset and input-guide builders for Nora Remotion workflow.",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}

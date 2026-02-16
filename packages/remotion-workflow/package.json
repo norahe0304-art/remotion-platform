@@ -1,0 +1,16 @@
+{
+  "name": "@nora/remotion-workflow",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Workflow CLI for using Nora Remotion process in existing or new projects.",
+  "bin": {
+    "remotion-workflow": "src/cli.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}

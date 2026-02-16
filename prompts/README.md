@@ -23,6 +23,7 @@ npm run prompts:sync
 npm run prompts:sync:since
 npm run prompts:app
 npm run prompts:open
+npm run workflow:init
 ```
 
 ## Sources
@@ -48,3 +49,5 @@ npm run prompts:open
 2. Click a tag to narrow down style/category.
 3. Click "Preview" to inspect full prompt.
 4. Click "Copy AI Template" (or "Copy") and paste into Codex / Claude Code.
+5. Fill placeholders in the AI chat message itself (not inside the prompt web app).
+6. Use `npm run workflow:init` if you need to bootstrap or connect a Remotion project before implementation.

@@ -14,6 +14,7 @@
     "prompts:sync": "node scripts/prompts-sync.mjs",
     "prompts:sync:since": "node scripts/prompts-sync.mjs --since",
     "prompts:app": "node scripts/prompts-app.mjs",
-    "prompts:open": "node scripts/prompts-app.mjs --open"
+    "prompts:open": "node scripts/prompts-app.mjs --open",
+    "workflow:init": "node packages/remotion-workflow/src/cli.mjs init"
   }
 }

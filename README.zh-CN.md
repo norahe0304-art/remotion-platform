@@ -12,7 +12,7 @@ Language: [English](./README.md) | [简体中文](./README.zh-CN.md)
 
 ## 一句话 SOP（新视频场景）
 
-选 Prompt -> 复制 AI 模板 -> 填业务信息 -> 生成初版 -> 调音画同步 -> 最终导出。
+先运行 workflow init -> 选 Prompt -> 复制模板 -> 在 AI 对话框填输入项 -> 生成初版 -> 调音画同步 -> 最终导出。
 
 Quick Start（1分钟）：[EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTART.md)
 
@@ -36,7 +36,19 @@ cd remotion-platform
 npm install
 ```
 
-如果你只想选 Prompt，不改代码，跑到第 2 步就够了。
+工作流统一入口（在本仓库内）：
+
+```bash
+npm run workflow:init
+```
+
+未来发布后的公共用法：
+
+```bash
+npx @nora/remotion-workflow init
+```
+
+发布后，终端用户无需克隆整仓库即可使用。
 
 ---
 
@@ -70,6 +82,8 @@ npm run prompts:app
 
 ## 3. 发起“新视频”标准输入（给 AI）
 
+填写位置：把“复制 AI 模板”粘贴到 AI 对话框（Codex / ChatGPT / Claude）里，再在那段文本中填写占位项；不是在网页里填。
+
 把“复制 AI 模板”得到的文本补全这三项：
 - 品牌/主题（例如：Pronetx dark-tech）
 - 视频时长（例如：60s）
@@ -82,15 +96,25 @@ npm run prompts:app
 
 ---
 
-## 4. 用模板创建新视频项目（工程侧）
+## 4. 创建/接入 Remotion 项目（默认路径）
 
-> 如果你已有项目（如 `pinpoint migration/video`），可跳过这步，直接在现有项目迭代。
+使用 `workflow init` 时会自动分流：
+- 如果当前目录已是 Remotion 项目：直接在当前项目注入 workflow 文件。
+- 如果不是：先通过 `create-video` 创建官方 Remotion 项目，再自动注入 workflow 文件。
 
-建议流程：
-1. 从 `templates/remotion-template-nora` 复制新目录
-2. 安装依赖
-3. 启动 Remotion Studio
-4. 先出“无 VO 粗剪版”验证视觉节奏
+手动默认路径（需要时）：
+
+```bash
+npx create-video@latest my-video
+cd my-video
+npm install
+npm run start
+```
+
+然后把你复制的 AI 模板贴给 Codex / ChatGPT / Claude，让它在这个项目里实现。
+
+可选高级路径：
+- 如果你团队需要内置品牌 token 和 controls，再用 `templates/remotion-template-nora`。
 
 ---
 
@@ -152,7 +176,16 @@ npm run prompts:sync
 
 # 启动 Prompt 网页选择器
 npm run prompts:app
+
+# 初始化/接入工作流（自动识别现有项目或新建项目）
+npm run workflow:init
 ```
+
+## 分发模型
+
+- 终端用户（不克隆仓库）：`npx @nora/remotion-workflow init`
+- 已有项目：在项目根目录执行同一命令。
+- 新项目：CLI 先创建官方 Remotion 项目，再自动初始化 workflow。
 
 ---
 

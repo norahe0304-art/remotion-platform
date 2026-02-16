@@ -4,7 +4,7 @@
 
 Language: [English](./QUICKSTART.en.md) | [简体中文](./QUICKSTART.md)
 
-## 你只要做这 5 步
+## 你只要做这 7 步
 
 1. 打开终端并进入项目
 ```bash
@@ -12,26 +12,34 @@ git clone https://github.com/norahe0304-art/remotion-platform.git
 cd remotion-platform
 ```
 
-2. 同步最新 Prompt（增量）
+2. 运行 workflow 初始化（适配“已有项目”和“新项目”）
+```bash
+npm run workflow:init
+```
+
+3. 如果提示需要创建项目，按 `create-video` 引导完成新项目创建（新用户场景）。
+
+4. 同步最新 Prompt（增量）
 ```bash
 npm run prompts:sync:since
 ```
 
-3. 打开 Prompt 网页
+5. 打开 Prompt 网页
 ```bash
 npm run prompts:app
 ```
 
-4. 在网页里点：
+6. 在网页里点：
 - 选来源（官方/社区）
-- 选标签
 - 点“预览”
 - 点“复制 AI 模板”
 
-5. 把模板发给 AI，并补 3 个信息
+7. 把模板发给 AI，并补 3 个信息
 - 品牌/主题
 - 时长
 - 目标受众
+
+填写位置：在 AI 对话框里粘贴模板后填写这 3 项。网页只负责筛选和复制，不负责填写。
 
 ## 成功标准
 

@@ -1,0 +1,329 @@
+/**
+ * [INPUT]: prompt records synced from upstream sources.
+ * [OUTPUT]: promptIndex constant for runtime search and template generation.
+ * [POS]: static data layer for @nora/remotion-prompts package.
+ * [PROTOCOL]: update this header when code changes, then check AGENTS.md
+ */
+
+export const promptIndex = [
+  {
+    "id": "manalkaff-prompts-arabic-news-animation",
+    "title": "Arabic News Animation",
+    "tags": [
+      "manalkaff",
+      "community",
+      "image-animation"
+    ],
+    "prompt": "Use Remotion best practices. Import the attached image and use Tesseract CLI to do OCR and find the positions of the text.\n\nIn Remotion, create a new composition where you:\n1. Load the image with generous padding on a white Full HD (1920x1080) background\n2. Duration: 5 seconds\n3. Apply a subtle zoom (1.0 → 1.05) and 3D rotation (±7.5° on Y axis, ±3° on X axis)\n4. Start with blur (15px) and unblur over 1 second\n5. After blur finishes, animate rough.js highlighters (left to right) over these texts:\n- \"[النص الأول]\"\n- \"[النص الثاني]\"\n- \"[النص الثالث]\"\n\nThe highlighter should appear behind the text using multiply blend mode.\nUse yellow highlight color (rgba(255, 230, 0, 0.5)).\nCheck for existing lockfiles and use the appropriate package manager.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts/tree/main/prompts/arabic-news-animation",
+    "author": "Abdullah4AI",
+    "usage_note": "Source from manalkaff/remotion-prompts repository."
+  },
+  {
+    "id": "manalkaff-prompts-maps-animation",
+    "title": "Maps Animation",
+    "tags": [
+      "manalkaff",
+      "community",
+      "image-animation"
+    ],
+    "prompt": "use remotion best practices. create a map animation where on each of the 10 biggest airports, you zoom in and rotate around the area by 360 degrees. then you zoom out and fly to the next one. when an airport is visible, show a lower third with the airport name and the passenger numbers. show 3d buildings. from from 10th place to 1st place.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts/tree/main/prompts/maps-animation",
+    "author": "JNYBGR",
+    "usage_note": "Source from manalkaff/remotion-prompts repository."
+  },
+  {
+    "id": "manalkaff-prompts-news-screenshot-animation",
+    "title": "News Screenshot Animation",
+    "tags": [
+      "manalkaff",
+      "community",
+      "image-animation"
+    ],
+    "prompt": "use remotion best practices. import the following image into the project: '~/Desktop/Screenshot 2026-01-31 at 17.15.12.png' use tesseract CLI to do OCR and find the positions of the text. in remotion, make a new composition where you load the image and pad the article generously on a white full HD background. while the composition is running for 5 seconds, slowly, very subtly, zoom into it and slightly rotate the article in 3d from left to right. the overall rotation should be around 15deg for each axis. at the beginning, blur the whole composition and unblur it over 1 second. after the blur is done, evolve a highlighter from left to right using rough.js over the words \"government shutdown\" and \"funding lapses\". the image has a white background. make sure the the marker appears behind the text. when installing new dependencies, check for existing lockfiles and use the right package manager.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts/tree/main/prompts/news-screenshot-animation",
+    "author": "Remotion",
+    "usage_note": "Source from manalkaff/remotion-prompts repository."
+  },
+  {
+    "id": "manalkaff-prompts-product-demo-video",
+    "title": "Product Demo Video",
+    "tags": [
+      "manalkaff",
+      "community",
+      "ui-demos"
+    ],
+    "prompt": "Create a demo video of the Presscut app/product using remotion. Use react components to replicate UI elements and replicate the UI of the app as closely as possible. The app has a LOT of features/functionality, so take guidance from the marketing home page/index for what to highlight, while keeping language simple and to-the-point. Really grill me with questions to nail down exactly how the final video should look/feel and what content should be there. The ultimate goal of this is to replicate what me, the founder, would be showing/doing with a product demo with a customer.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts/tree/main/prompts/product-demo-video",
+    "author": "Shpigford",
+    "usage_note": "Source from manalkaff/remotion-prompts repository."
+  },
+  {
+    "id": "manalkaff-prompts-transparent-video-overlay",
+    "title": "Transparent Video Overlay",
+    "tags": [
+      "manalkaff",
+      "community",
+      "ui-demos"
+    ],
+    "prompt": "use remotion best practices. this is our youtube channel: https://www.youtube.com/@remotion_dev. use curl scrape youtube to find the avatar and the subscriber count. multiple subscriber counts appear on the page, find the right one. make a white lower third that slides in from the bottom center. show the name, subscriber count and avatar. display a typical fixed width black youtube subscribe button that changes from \"Subscribe\" to \"Subscribed\". use a ease-out animation and for pressing in the button and a spring animation with a slight bounce once the button is released. fade out the lower third. render it as a transparent prores video.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts/tree/main/prompts/transparent-video-overlay",
+    "author": "Remotion",
+    "usage_note": "Source from manalkaff/remotion-prompts repository."
+  },
+  {
+    "id": "manalkaff-prompts-video-editor-interface",
+    "title": "Video Editor Interface",
+    "tags": [
+      "manalkaff",
+      "community",
+      "tools-workflows"
+    ],
+    "prompt": "Please add a Claude Code Skill along with an interface for video animation.\n\nI want you to create an app that very simply allows us to use the Remotion skill, read more here: npx skills add remotion-dev/skills\n\nAnd after you create this skill you will then be able to ask you to edit a video in a canvas.\n\nSo the sole purpose of the app should be a little canvas that you can edit and manipulate and change it so you can make a video. Optimize this for openness and being able to edit each scene in the video after the first generation.\n\nSince you are running in a browser on http://vibecode.dev, I want you to use the assets. Users can upload their own assets to the app or generate assets they may want to use them in the video generations.\n\nPlease search up this new remotion skill this up. Figure out how to configure this app and skill so that it works great and is easy to create high quality animated videos such as launch videos.\n\nultrathink, go.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts/tree/main/prompts/video-editor-interface",
+    "author": "rileybrown",
+    "usage_note": "Source from manalkaff/remotion-prompts repository."
+  },
+  {
+    "id": "remotion-dev-audio-spectrum-visualizer",
+    "title": "Audio Spectrum Visualizer",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a 1920x1080 dark-themed composition called 'AudioSpectrum' featuring an audio spectrum visualizer synced to funk.mp3 from the public folder, displaying 32 vertical frequency bars that bounce and pulse reactively to the bass, mids, and highs, with a vibrant gradient from magenta to cyan across the bars, each bar having a subtle glow effect and smooth rounded tops, the bars reflecting faintly on a glossy dark surface below, centered horizontally with gentle horizontal padding, the whole visualization fading in smoothly at the start, duration matching the full audio length at 30fps — allow changing the bar count, gradient colors, bar width, and glow intensity — use remotion-best-practices skill.\"",
+    "source_url": "https://www.remotion.dev/prompts/audio-spectrum-visualizer",
+    "author": "samohovets",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-bar-line-chart-combined",
+    "title": "Bar + Line Chart (combined)",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a 1920x1080 dark-themed (#1A1A2E) composition called 'BarLineChart' with a combination chart showing monthly sales data — bars for revenue ($8K, $12K, $15K, $11K, $18K, $22K for Jan-Jun) that grow upward from the baseline, overlaid with a blue (#0B84F3) line tracking conversion rate (2.1%, 2.8%, 3.2%, 2.9%, 3.8%, 4.2%) that draws progressively with a glowing effect, bars animate sequentially with slight overlap while the line follows behind, include axis labels and a pulsing dot marker at the line tip, smooth spring-based timing over 120 frames at 30fps — use remotion-best-practices skill.",
+    "source_url": "https://www.remotion.dev/prompts/bar-line-chart-combined",
+    "author": "samohovets",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-bms-active-cell-balancing-animation-8s1p-pack-with-energy-flow-visualization",
+    "title": "BMS Active Cell Balancing Animation - 8S1P Pack with Energy Flow Visualization",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a Remotion project that renders a BMS Active Cell Balancing animation. 10 seconds, 30fps, 1280x720, output as MP4.                                                                                   \n                                         \n  Setup:                                                                                                                                                                                                      \n  mkdir remotion-bms && cd remotion-bms                                                                                                                                                                       \n  npm init -y                                                                                                                                                                                                 \n  npm i remotion react react-dom                            \n  npm i -D @remotion/cli typescript\n  tsconfig.json: ES2022, jsx: react-jsx, moduleResolution: bundler, module: ESNext\n\n  Project structure: src/index.ts, src/Root.tsx, src/BmsCellBalancing.tsx\n\n  Animation (BmsCellBalancing.tsx):\n  8 cells (8S1P) in a pack, dark theme (#0b1120), Courier New font. Initial voltages unbalanced between 3.3V and 4.05V. Background with subtle grid lines.\n\n  Phases (at 300 frames total):\n  - Frame 0..60: IDLE, show unbalanced cells\n  - Frame 60..90: MEASURING CELLS... (yellow status dot)\n  - Frame 90..240: BALANCING (green pulsing dot), voltages converge via smoothstep to average\n  - Frame 240..300: BALANCED (blue)\n\n  Each cell shows:\n  - Color-coded SOC fill level (green when high, orange when medium, red when low) with gradient\n  - Terminal nub on top, bus bars top/bottom connecting all cells\n  - Voltage display (3 decimal places), cell label (C1..C8), SOC in %, temperature\n  - During balancing: green border + arrow down for cells below avg (Charging), orange border + arrow up for cells above avg (Discharging)\n  - Particle animation visualizing energy flow\n  - Shimmer effect on the fill level\n\n  Info panel at bottom with spring animation: Pack Voltage, Max Delta (color-coded: green below 10mV, orange below 50mV, red above), Avg Cell, Config (8S1P), Pack SOC, Method: Active\n\n  Legend at bottom: \"▲ Discharging (high cell)\" orange, \"▼ Charging (low cell)\" green\n\n  Render: npx remotion render src/index.ts BmsCellBalancing out/bms-cell-balancing.mp4",
+    "source_url": "https://www.remotion.dev/prompts/bms-active-cell-balancing-animation-8s1p-pack-with-energy-flow-visualization",
+    "author": "pasrom",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-cursor-agent-skills-announcement",
+    "title": "Cursor Agent Skills Announcement",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a video project announcing Agent Skills, following Cursor brand rules. 1920×1080, 60fps. Typewriter text effect at about 1 character per frame, then hold for 3 seconds after typing on every title card. Line 1 types first, then line 2.\n\nCard 1: “Agent Skills are now available” on line 1 and “in Cursor” on line 2\nCard 2: “Skills let agents discover and run” and line 2 “specialized prompts and code.”\nThen play the skills.mp4 recording full-screen, framed top-aligned for first 2 seconds, then zoom in (with easing) to the top-left by about 125%. Should be continuous zoom!\nFinal card: “This video was made entirely in Cursor\" on line 1 and \"with Remotion skills.” on line 2, then hold;\nEnd with the existing end.mp4 animation full-screen.\n\nRender and open the file inside Cursor’s browser tool to let me see it here!\n\n# Notes:\n# 1. Uses an existing screen recording @ericzakariasson made.\n# 2. Uses our existing end card animation.\n# 3. Had a Cursor rule with our brand guidelines and colors.",
+    "source_url": "https://www.remotion.dev/prompts/cursor-agent-skills-announcement",
+    "author": "@edwinarbus",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-launch-video-on-x",
+    "title": "Launch Video on X",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a Remotion video (1080x700, 30fps, ~37s) for OpenClawd — an open source AI desktop agent. Dark theme (#0c0a09\n  background, #fbbf24 amber accent). Background music: \"Walen - HEADPHONK\" with 1s fade-in and 2s fade-out at 40% volume. 8\n  scenes in series:\n\n  Scene 1 — Terminal Install (120 frames / 4s)\n  Mac-style terminal window with traffic light dots. Types npx openclawd-cli character by character (1 frame/char). After\n  typing, shows ASCII art logo \"OPENCLAWD\" in amber, then server output lines appearing progressively: version banner, SDK\n  backends, 20+ providers/80+ models loaded, model names (Opus 4.6, GPT-5.3, Gemini 3, etc.), MCP servers connected, \"Opening\n  desktop app on :3001\". Terminal slides in from bottom with 3D perspective (rotateX 20deg, slight rotateY oscillation).\n\n  Scene 2 — Home Screen (150 frames / 5s)\n  Desktop app window with centered \"OpenClawd\" title (Georgia serif), tagline \"Open Source Alternative to Claude Cowork\",\n  rounded chat input with send button, and provider/model selector chips (Claude Code + Opus 4.6 + Attach). Spring-animated\n  fade-in with staggered delays (title → tagline → input → controls).\n\n  Scene 3 — Chat Interface (160 frames / 5.3s)\n  Three-column layout: left sidebar with chat history (MCP Integration, Code Review, etc.), center with user message \"Review my\n   API code\" and streaming assistant response about security findings (rate limiting, SQL injection, input validation), right\n  panel showing progress steps (Reading → Security analysis → Applying fixes → Creating PR) and tool calls (filesystem.read,\n  bash.exec, github.create_pr) with green checkmarks.\n\n  Scene 4 — Provider Switch (130 frames / 4.3s)\n  Two dropdown panels side by side. Left: 8 providers (Claude Code, OpenCode, OpenAI, Gemini, DeepSeek, Llama 4, MiniMax,\n  Ollama) with colored dots and selection indicator. Right: 7 models (Opus 4.6, Sonnet 4.5, GPT-5.3 Codex, etc.) with\n  descriptions. Bottom tagline: \"Claude Code + OpenCode SDK — 20+ providers · Open Source models\". Staggered item reveals.\n\n  Scene 5 — MCP Catalog (140 frames / 4.7s)\n  Modal overlay with \"MCP Server Catalog — 20+ servers available\". Category filter pills (All, Core, Database, Developer,\n  Communication). 6 server cards with icons: Filesystem, Git, GitHub (installed), PostgreSQL, Slack, Puppeteer. Auth badges\n  (green \"No Auth\" / amber \"Requires Auth\"). Install/Installed buttons with checkmarks.\n\n  Scene 6 — Messaging Bots (120 frames / 4s)\n  Full-screen \"Your AI, everywhere you chat\" with subtitle \"Full tool access · Memory · Scheduling\". 4 platform cards\n  (WhatsApp, Telegram, Signal, iMessage) with SVG icons, green \"Connected\" status dots, and feature tags (Memory, Scheduling,\n  Tools). Cards scale up with spring animation.\n\n  Scene 7 — Logo Combo (180 frames / 6s)\n  Three sub-scenes: (a) Intro with converging amber lines, center burst ring, floating particles, grid background. (b) \"✦\n  Introducing ✦\" with word-by-word reveal: \"Open Source AI Desktop\" in 56px white text, model names below in gray monospace.\n  (c) 8 provider icons in two rows with colored dots and labels, tagline \"Claude Code + OpenCode SDK · 80+ models | Desktop ·\n  Messaging · API\".\n\n  Scene 8 — GitHub CTA (120 frames / 4s)\n  \"100% OPEN SOURCE\" label, spinning GitHub logo (rotates in from -180deg), orbiting amber star icons, \"Star us on GitHub\" in\n  36px white, pulsing scale animation, \"github.com/rohitg00/openclawd\" in monospace with dark card background. Floating\n  particles and subtle grid.\n\n  All transitions use spring animations with fade + scale (0.95→1 in, 1→0.95 out). Each scene inside an AppWindow component\n  (mac chrome with traffic lights). Color palette: #0c0a09 bg, #1c1917 surfaces, #292524 borders, #fbbf24 amber accent, #fafaf9\n   white text, #a8a29e muted text, #78716c dim text. Fonts: Inter for UI, SF Mono for code, Georgia for branding.",
+    "source_url": "https://www.remotion.dev/prompts/launch-video-on-x",
+    "author": "@ghumare64",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-music-cd-store-promo",
+    "title": "Music CD store promo",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Use Remotion best practices skill. Create a 30-second video at 30fps. Start with a hook: white text on black background, 'Where do you even buy music anymore?' — fade it in, hold for 2 seconds, fade out.\n\nNext section: show the Disc Depot logo from public/discdepot-logo.png. Use a warm orange gradient background. Add a subtle tagline below: 'Music, delivered.’.\n\nIn the next section, add a counter that counts up to 12,000 with a plus sign. Label it 'Happy customers'. Keep the same background style.\n\nCreate 5 CD album covers as abstract gradient cards. Different color combinations. Animate them sliding in one by one, arranged in a row.\n\nAdd artist names and song titles.\n\nLet’s add a final section:\nEnd with a call to action: 'Find your sound.' and the URL 'discdepot.com'. Fade to black.\n\nLet’s improve the transition between series. For example: orange in the second section should interpolate from black to orange. Now it’s just not too smooth. And improve that between sections.\n\n# A lot of refining prompts followed.\n\nVery nice! Can you make logo react to audio using `useAudioData` hook? https://www.remotion.dev/docs/use-windowed-audio-data.md\n\nCan you make ALL scenes audio reactive? So that all elements dance to the music frequencies?\n\nI want everything react to low frequencies only",
+    "source_url": "https://www.remotion.dev/prompts/music-cd-store-promo",
+    "author": "samohovets",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-news-article-headline-highlight",
+    "title": "News article headline highlight",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "use remotion best practices. import the following image into the project: '~/Desktop/Screenshot 2026-01-31 at 17.15.12.png' use tesseract CLI to do OCR and find the positions of the text. in remotion, make a new composition where you load the image and pad the article generously on a white full HD background. while the composition is running for 5 seconds, slowly, very subtly, zoom into it and slightly rotate the article in 3d from left to right. the overall rotation should be around 15deg for each axis. at the beginning, blur the whole composition and unblur it over 1 second. after the blur is done, evolve a highlighter from left to right using rough.js over the words \"government shutdown\" and \"funding lapses\". the image has a white background. make sure the the marker appears behind the text. when installing new dependencies, check for existing lockfiles and use the right package manager.",
+    "source_url": "https://www.remotion.dev/prompts/news-article-headline-highlight",
+    "author": "@Remotion",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-product-demo-for-presscut",
+    "title": "Product Demo for Presscut",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a demo video of the Presscut app/product using remotion. Use react componenents to replicate VI elements and replicate the UI of the app as closely as possible. The app has a LOT of features/ functionality, so take guidance from the marketing home page/index for what to highlight, while keeping language simple and to-thepoint. Really grill me with questions to nail down exactly how the final video should look/feel and what content should be there. The ultimate goal of this is to replicate what me, the founder, would be showing/doing with a product demo with a customer.",
+    "source_url": "https://www.remotion.dev/prompts/product-demo-for-presscut",
+    "author": "@Shpigford",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-promotion-video-for-vvterm",
+    "title": "Promotion video for VVTerm",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Make a promotion video in Apple presentation style for VVTerm. Check its website VVTerm.com for details and assets like logo. Use nerd fonts and inter. Make it around 20 seconds.",
+    "source_url": "https://www.remotion.dev/prompts/promotion-video-for-vvterm",
+    "author": "@wiedymi",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-real-estate-investing",
+    "title": "Real Estate Investing",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "You are a high-end real estate video editor, motion graphics designer, and short-form content strategist.\n\nI will upload a raw real estate video.\n\nYour task is to transform it into a 15–30 second professional cash cow style video optimized for high retention, authority, and engagement.\n\nThe final output must include:\n\nCinematic real estate motion graphics\n\nPremium typography\n\nDynamic transitions\n\nStrategic pacing\n\nBackground music\n\nSubtle but powerful branding elements\n\n🔹 PROMPT 1 — VIDEO ANALYSIS\n\nAnalyze the uploaded video and:\n\nIdentify key visual highlights (luxury interiors, exterior shots, amenities, skyline, etc.)\n\nDetect weak or slow sections and suggest trims\n\nBreak the video into strong 1–3 second micro-scenes\n\nSuggest the ideal final duration (15–30 seconds max)\n\nProvide a timestamp breakdown before editing.\n\n🔹 PROMPT 2 — STRUCTURED TIMELINE EDIT PLAN\n\nCreate a second-by-second timeline plan:\n\nFor each timestamp include:\n\nScene description\n\nMotion effect (zoom in, parallax, speed ramp, pan, drone enhancement)\n\nTransition style (whip, smooth zoom, fade through black, motion blur)\n\nOn-screen text (if applicable)\n\nText animation style\n\nKeep pacing fast, premium, and cinematic.\n\n🔹 PROMPT 3 — REAL ESTATE MOTION GRAPHICS PACKAGE\n\nAdd professional real estate motion graphics such as:\n\nProperty price reveal animation\n\nLocation lower-third with animated map pin\n\nBedroom/Bath/Sqft animated icon counters\n\n“For Sale” / “Just Listed” / “Luxury Living” animated title\n\nSubtle blueprint grid overlay (low opacity)\n\nAnimated frame lines or corner brackets\n\nDesign style:\n\nClean\n\nMinimal\n\nPremium\n\nCorporate luxury\n\nColor palette:\n\nBlack + Gold (luxury) OR\n\nWhite + Navy (corporate)\n\n🔹 PROMPT 4 — TYPOGRAPHY & TEXT STYLE\n\nUse high-end real estate fonts:\n\nHeadline font: Modern serif or bold sans-serif\n\nSubtext font: Clean minimal sans-serif\n\nText animation style:\n\nSmooth fade + slide\n\nMask reveal\n\nWord-by-word emphasis for hooks\n\nInclude:\n\nSubtle text shadow\n\nLight glow or stroke\n\nClean spacing\n\n🔹 PROMPT 5 — CINEMATIC ENHANCEMENTS\n\nAdd:\n\nLight leaks (subtle)\n\nCinematic color grading (warm highlights, rich shadows)\n\nSlight film grain\n\nSlow zoom on still frames\n\nAmbient luxury background sound design\n\nBackground music:\n\nDeep house / cinematic corporate / luxury instrumental\n\nBeat drop aligned with best visual moment\n\nAudio balanced professionally\n\n🔹 PROMPT 6 — RETENTION OPTIMIZATION\n\nImprove engagement by:\n\nStrong hook in first 2 seconds\n\nPattern interrupt at 5–7 seconds\n\nSlight speed ramp during highlight scene\n\nEnding with:\n\nLoop-style cut OR\n\nStrong CTA (“Book a private tour today”)\n\n🔹 PROMPT 7 — FINAL EXPORT SETTINGS\n\nOptimize for:\n\nTikTok / Reels / Shorts\n\n9:16 vertical format\n\n1080x1920\n\nSharp compression\n\nLoud but clean audio\n\nEnsure:\n\nNo clutter\n\nProfessional spacing\n\nHigh-end real estate brand feel\n\nDeliver output as:\n\nStep-by-step editing guide\n\nTimestamp structured\n\nReady-to-execute professional instructions",
+    "source_url": "https://www.remotion.dev/prompts/real-estate-investing",
+    "author": "HarisShah2345",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-rocket-launches-timeline",
+    "title": "Rocket Launches Timeline",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Animate every SpaceX rocket launch from 2015–2025 in chronological order. Show the launch parabolas with trajectory fading. Use an abstract, minimalist aesthetic. Give me three versions first, then I’ll pick one and refine it via feedback.",
+    "source_url": "https://www.remotion.dev/prompts/rocket-launches-timeline",
+    "author": "@crispynotfound",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-shape-to-words-transformation",
+    "title": "Shape to words transformation",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "Create a premium 10-second motion graphics intro using Remotion and React.\n\nBackground: Clean white canvas with a subtle light-gray grid pattern.\n\nSequence of Events:\n\nScene 1 (The Setup): precise row of 8 colorful, filled geometric shapes (Pentagon, Triangle, Square, Circle, Hexagon, Diamond, Circle, Triangle) centered on screen with even spacing (90px). They should have a gentle, organic \"breathing\" idle animation.\nScene 2 (The Morph): Trigger a dynamic sequence where the shapes jump up, spin 180 degrees in mid-air, and smoothly morph (using flubber) into the bold block letters \"R-E-M-O-T-I-O-N\". Add a ghost-trail effect behind them during the jump for speed.\nScene 3 (The Arrival): Fly in the Remotion Logo from the left side to hover near the 'R'. Have it snap into place with a spring animation and immediately perform a full 360-degree rotation.\nScene 4 (The Wipe): Execute a slow, cinematic exit. The logo should slide smoothly across the entire screen from left to right. Implement a \"Wipe Logic\" where each letter of \"REMOTION\" vanishes (scales down/fades out) exactly in sync as the logo passes over it, creating an erasing effect.\nTechnical Requirements: Use remotion springs for all physics (damping: 14 for jumps, damping: 300 for the slow wipe). No strokes on shapes, only filled vibrant colors.",
+    "source_url": "https://www.remotion.dev/prompts/shape-to-words-transformation",
+    "author": "@tiw_ari_ayu",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-spinning-glitching-svg-logo-turned-3d",
+    "title": "Spinning, glitching SVG Logo turned 3D",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "use remotion best practices. create a new composition with the following SVG in 3D. add a metallic material to it: <svg width=\"988\" height=\"317\" viewBox=\"0 0 988 317\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_9_8)\">\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M988 158.5C988 200.537 935.954 240.852 843.311 270.576C750.668 300.301 625.017 317 494 317C362.983 317 237.332 300.301 144.689 270.576C52.0463 240.852 0 200.537 0 158.5C0 116.463 52.0463 76.1481 144.689 46.4236C237.332 16.6991 362.983 0 494 0C625.017 0 750.668 16.6991 843.311 46.4236C935.954 76.1481 988 116.463 988 158.5ZM940 158.5C940 120.176 893.011 83.4221 809.37 56.3231C725.728 29.2241 612.287 14 494 14C375.713 14 262.272 29.2241 178.63 56.3231C94.9891 83.4221 48 120.176 48 158.5C48 196.824 94.9891 233.578 178.63 260.677C262.272 287.776 375.713 303 494 303C612.287 303 725.728 287.776 809.37 260.677C893.011 233.578 940 196.824 940 158.5Z\" fill=\"black\"/>\n<path d=\"M120.918 209L142.644 106.949H193.44C203.997 106.949 210.423 108.02 214.707 110.315C220.215 113.375 223.122 118.73 223.122 125.615C223.122 135.713 218.532 152.237 214.095 158.51C210.423 163.559 206.292 165.701 196.347 167.843L196.194 168.608C205.986 169.22 210.729 173.657 210.729 181.919C210.729 184.061 210.576 185.438 209.811 188.651L205.527 209H181.659L185.025 193.088C185.637 190.487 185.79 188.804 185.79 186.968C185.79 181.001 182.577 178.553 174.774 178.553H151.059L144.48 209H120.918ZM155.19 158.51H179.67C187.779 158.51 191.757 156.368 194.205 150.554C195.582 147.647 197.724 137.396 197.724 134.489C197.724 128.828 195.123 127.145 186.249 127.145H161.922L155.19 158.51ZM258.674 126.38L253.931 148.718H299.372L295.853 165.395H250.412L245.21 189.569H294.17L290.039 209H217.517L239.243 106.949H311L306.869 126.38H258.674ZM445.852 106.949L424.126 209H400.87L410.05 166.16C411.733 158.051 412.651 154.379 417.241 136.784L419.842 126.992H419.077L414.181 136.478C405.46 153.002 403.165 157.286 398.881 164.63L373.177 209H352.522L345.331 164.783C344.107 156.98 343.648 153.614 341.812 136.631L340.894 127.298H340.129L338.599 136.937C335.845 154.532 335.08 159.275 333.55 166.16L324.523 209H301.267L322.993 106.949H360.172L365.833 145.046C366.751 151.319 367.057 154.379 368.434 168.761L369.046 176.717H369.964L373.942 168.761C380.827 154.838 382.663 151.319 386.182 145.199L407.755 106.949H445.852ZM504.916 106.184C518.533 106.184 525.112 107.102 530.467 109.703C538.882 113.681 542.86 120.566 542.86 131.276C542.86 139.844 536.434 171.515 532.609 181.766C528.019 193.853 521.899 200.891 511.801 205.328C504.457 208.541 495.736 209.765 480.13 209.765C464.83 209.765 458.251 208.694 452.131 205.481C444.94 201.503 441.268 194.771 441.268 184.979C441.268 175.799 447.541 145.505 451.978 133.724C456.415 121.79 462.382 115.364 473.092 110.468C480.436 107.255 488.392 106.184 504.916 106.184ZM498.49 126.38C485.332 126.38 481.201 127.604 477.376 132.806C474.622 136.631 473.551 139.844 470.032 155.909C466.972 169.832 466.054 175.34 466.054 179.012C466.054 188.039 469.114 189.569 486.709 189.569C502.927 189.569 507.058 186.662 511.342 171.821C513.79 163.1 518.074 141.374 518.074 137.09C518.074 132.194 516.697 129.44 513.637 128.063C510.883 126.686 507.823 126.38 498.49 126.38ZM595.854 127.298L578.412 209H554.85L572.139 127.298H544.599L548.883 106.949H629.055L624.618 127.298H595.854ZM655.328 106.949L633.602 209H610.04L631.766 106.949H655.328ZM714.478 106.184C728.095 106.184 734.674 107.102 740.029 109.703C748.444 113.681 752.422 120.566 752.422 131.276C752.422 139.844 745.996 171.515 742.171 181.766C737.581 193.853 731.461 200.891 721.363 205.328C714.019 208.541 705.298 209.765 689.692 209.765C674.392 209.765 667.813 208.694 661.693 205.481C654.502 201.503 650.83 194.771 650.83 184.979C650.83 175.799 657.103 145.505 661.54 133.724C665.977 121.79 671.944 115.364 682.654 110.468C689.998 107.255 697.954 106.184 714.478 106.184ZM708.052 126.38C694.894 126.38 690.763 127.604 686.938 132.806C684.184 136.631 683.113 139.844 679.594 155.909C676.534 169.832 675.616 175.34 675.616 179.012C675.616 188.039 678.676 189.569 696.271 189.569C712.489 189.569 716.62 186.662 720.904 171.821C723.352 163.1 727.636 141.374 727.636 137.09C727.636 132.194 726.259 129.44 723.199 128.063C720.445 126.686 717.385 126.38 708.052 126.38ZM868.06 106.949L846.334 209H806.554L794.467 159.581C793.09 153.767 792.478 150.248 789.877 135.254L788.347 127.145H787.429C784.981 141.221 782.992 152.084 781.462 159.581L771.058 209H747.955L769.681 106.949H809.155L820.324 154.226C823.078 165.701 823.078 165.854 827.362 188.192H828.28L829.657 180.236C831.646 168.761 831.799 167.231 834.094 156.521L844.651 106.949H868.06Z\" fill=\"black\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_9_8\">\n<rect width=\"988\" height=\"317\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n\nmake it smaller and more silver\n\nit still is pretty dark. change the material and lighting to make it much more silver and bright\n\nok, now it is completely white. find a middle ground so it still is a bit metallic\n\nright now you can see the backside of the logo. make it rotate only from -90 to 90 degree and then start over at -90\n\nadd the following glitch effect to it: https://react-postprocessing.docs.pmnd.rs/effects/glitch\n\nyes please, please make everything deterministic\n\nexport this as a transparent video i can use in after effects\n\ndid not work, check the docs: https://www.remotion.dev/docs/transparent-videos/",
+    "source_url": "https://www.remotion.dev/prompts/spinning-glitching-svg-logo-turned-3d",
+    "author": "@Remotion",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-strava-run-visualized",
+    "title": "Strava Run visualized",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "[download GPX from strava website]\n\nuse remotion best practices. turn my run today into an animated instagram story: ~/Downloads/Afternoon_Run.gpx\n\nshow a map, the route and live metrics for my run. use font sizes that will be legible when user watches as a story",
+    "source_url": "https://www.remotion.dev/prompts/strava-run-visualized",
+    "author": "@JNYBGR",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-the-kinetic-marketing",
+    "title": "The Kinetic Marketing",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "A high-velocity kinetic typography promo for a modern developer tool.\n\nVisual Style: Premium \"Aurora Glassmorphism\" aesthetic. Backgrounds are seamless, breathing radial gradients in Pastel Pink, Lavender, and Soft Blue. Key Elements: Dozens of 3D Floating React Logos drift through the scene with heavy depth-of-field blur. Rotating dashed \"Radar Rings\" and \"Pulse Circles\" add technical texture behind the text. Color Palette: Electric Azure Blue (#0b84f3) for primary accents against Deep Black bold typography (Poppins Black). Motion Physics: Elastic \"Layout Smoothing\" – new words crash in and physically push existing text aside. Transitions: Elements rotate -15° and shrink to zero to vanish. Scenes switch via massive Blue Iris Wipes and Ring Tunnels. Matches a 140 BPM fast-paced beat.",
+    "source_url": "https://www.remotion.dev/prompts/the-kinetic-marketing",
+    "author": "@tiw_ari_ayu",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-threejs-top-20-games-sold-ranking-1",
+    "title": "Three.js \"Top 20 Games Sold\" Ranking",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "here is an empty remotion project with the default react three fiber example.\n\nI want to create a 3D video to visualize top 20 videos games by copies of all time.Create a Remotion video that visualizes the top 20 best-selling video games as a vertical \"tower\", use boxes as towers with height representing the amount of copies.\n\nremove the default example from this project and create a remotion + react three fiber example to do this visualization.\nResolution: 1920x1080\nFPS:60\n\nanimate the camera from the bottom of the last rank to the top of the first rank. stop the camera on the top of each rank for a few miliseconds.\n\nhere is the game ranking data you need\n\n# [data as a JSON string]\n# More instructions: https://x.com/DilumSanjaya/status/2018367621381620142",
+    "source_url": "https://www.remotion.dev/prompts/threejs-top-20-games-sold-ranking-1",
+    "author": "@DilumSanjaya",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-transparent-call-to-action-overlay",
+    "title": "Transparent Call-To-Action overlay",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "use remotion best practices. this is our youtube channel: https://www.⁠youtube.⁠com/@⁠remotion_dev. use curl scrape youtube to find the avatar and the subscriber count. multiple subscriber counts appear on the page, find the right one. make a white lower third that slides in from the bottom center. show the name, subscriber count and avatar.  display a typical fixed width black youtube subscribe button that changes from \"Subscribe\" to \"Subscribed\". use a ease-out animation and for pressing in the button and a spring animation with a slight bounce once the button is released. fade out the lower third. render it as a transparent prores video.",
+    "source_url": "https://www.remotion.dev/prompts/transparent-call-to-action-overlay",
+    "author": "@Remotion",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "remotion-dev-travel-route-on-map-with-3d-landmarks",
+    "title": "Travel Route on Map with 3D landmarks",
+    "tags": [
+      "remotion-dev",
+      "official"
+    ],
+    "prompt": "use remotion best practices. make a new composition and add a map and zoom out of LA while staying focused on it. once done, animate a line from LA to NY and make the camera follow it.\n\nadd another stop to the trip, this time we go to paris. animate the eiffel tower and show it in 3D!",
+    "source_url": "https://www.remotion.dev/prompts/travel-route-on-map-with-3d-landmarks",
+    "author": "@JNYBGR",
+    "usage_note": "Source from remotion.dev prompt gallery."
+  },
+  {
+    "id": "terminal-proof-dark-tech",
+    "title": "Terminal Proof Narrative",
+    "tags": [
+      "terminal",
+      "proof",
+      "dark-tech"
+    ],
+    "prompt": "Create a dark-tech sequence where a CLI command appears as proof, with restrained code rain and strong readability.",
+    "source_url": "https://www.remotion.dev/prompts",
+    "author": "remotion-community",
+    "usage_note": "Use as inspiration; adapt copy and pacing to brand voice."
+  },
+  {
+    "id": "two-path-comparison",
+    "title": "Two Path Comparison",
+    "tags": [
+      "comparison",
+      "split",
+      "decision"
+    ],
+    "prompt": "Visualize two diverging paths with clear emotional contrast and subtle motion, prioritizing legibility.",
+    "source_url": "https://github.com/manalkaff/remotion-prompts",
+    "author": "community",
+    "usage_note": "Verify source license/terms before direct commercial reuse."
+  }
+];

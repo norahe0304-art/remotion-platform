@@ -12,7 +12,7 @@ Language: [English](./README.md) | [简体中文](./README.zh-CN.md)
 
 ## One-line SOP (new video)
 
-Pick prompt -> Copy AI template -> Fill business inputs -> Generate v1 -> Sync audio/video -> Export final.
+Run workflow init -> Pick prompt -> Copy template -> Fill inputs in AI chat -> Generate v1 -> Sync A/V -> Export final.
 
 Quick Start (1 minute): [EN](./docs/QUICKSTART.en.md) | [ZH](./docs/QUICKSTART.md)
 
@@ -36,7 +36,19 @@ cd remotion-platform
 npm install
 ```
 
-If you only want prompt selection (no code changes), go to Step 2.
+Workflow entrypoint (inside this repo):
+
+```bash
+npm run workflow:init
+```
+
+Future public usage (after package publish):
+
+```bash
+npx @nora/remotion-workflow init
+```
+
+No full repo clone required for end users after publish.
 
 ---
 
@@ -70,6 +82,8 @@ In the app:
 
 ## 3. Standard input for a new video request
 
+Where to input: Paste the copied AI template into your AI chat (Codex / ChatGPT / Claude), then edit the placeholders there. Do not input inside the prompt web app.
+
 After copying AI template, fill at least:
 - Brand/theme (e.g. Pronetx dark-tech)
 - Video length (e.g. 60s)
@@ -82,15 +96,25 @@ Recommended extras:
 
 ---
 
-## 4. Create a new video project (engineering)
+## 4. Create a Remotion project (default path)
 
-If you already have an existing project (for example `pinpoint migration/video`), iterate there directly.
+With `workflow init`, behavior is automatic:
+- If current directory is already a Remotion project: initialize workflow files in place.
+- If not: create a new official Remotion project via `create-video`, then initialize workflow files.
 
-Suggested flow:
-1. Copy from `templates/remotion-template-nora`
-2. Install deps
-3. Start Remotion Studio
-4. Create a no-VO rough cut first to validate visual rhythm
+Manual default path (if needed):
+
+```bash
+npx create-video@latest my-video
+cd my-video
+npm install
+npm run start
+```
+
+Then paste your copied AI template into Codex / ChatGPT / Claude and ask it to implement inside this project.
+
+Optional advanced path:
+- If your team wants shared brand tokens and controls out of the box, use `templates/remotion-template-nora`.
 
 ---
 
@@ -143,7 +167,14 @@ npm run prompts:search -- terminal
 npm run prompts:sync:since
 npm run prompts:sync
 npm run prompts:app
+npm run workflow:init
 ```
+
+## Distribution model
+
+- End users (no repo clone): `npx @nora/remotion-workflow init`
+- Existing projects: run the same command in project root.
+- New projects: CLI creates an official Remotion project, then initializes workflow.
 
 ---
 
