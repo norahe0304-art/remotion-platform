@@ -6,35 +6,23 @@ Language: [English](./QUICKSTART.en.md) | [简体中文](./QUICKSTART.md)
 
 ## Do these 7 steps
 
-1. Open terminal and enter project
+1. Create a video project (no repo clone)
 ```bash
-git clone https://github.com/norahe0304-art/remotion-platform.git
-cd remotion-platform
+npx -y @norahe/remotion-workflow init --project-name my-video
+cd my-video
+npm install
+npm run dev
 ```
 
-2. Initialize workflow (works for both existing and new project)
-```bash
-npm run workflow:init
-```
+2. Open prompt web picker
+Open: `https://prompts-mauve.vercel.app/app/`
 
-3. If prompted, follow `create-video` to create a new project (new users).
-
-4. Sync latest prompts (incremental)
-```bash
-npm run prompts:sync:since
-```
-
-5. Open prompt web picker
-```bash
-npm run prompts:app
-```
-
-6. In the web app:
+3. In the web app:
 - choose source (official/community)
 - click `Preview`
 - click `Copy AI Template`
 
-7. Send template to AI and fill 3 fields
+4. Send template to AI and fill 3 fields
 - brand/theme
 - duration
 - target audience

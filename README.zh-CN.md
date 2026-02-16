@@ -39,15 +39,6 @@ npm install
 npm run dev
 ```
 
-维护者路径（需要改这个 monorepo 本身时）：
-
-```bash
-git clone https://github.com/norahe0304-art/remotion-platform.git
-cd remotion-platform
-npm install
-npm run workflow:init
-```
-
 ---
 
 ## 1. 同步 Prompt 数据（每天增量）
@@ -64,11 +55,12 @@ npm run prompts:sync:since
 
 ## 2. 打开“非技术用户网页”
 
+浏览器打开（线上）：`https://prompts-mauve.vercel.app/app/`
+
+本地备用（可选）：
 ```bash
 npm run prompts:app
 ```
-
-浏览器打开：`http://localhost:4180/app/`
 
 网页内操作：
 1. 先选来源（官方 / 社区）。
@@ -182,7 +174,7 @@ npm run workflow:init
 
 ## 分发模型
 
-- 终端用户（不克隆仓库）：`npx @norahe/remotion-workflow init`
+- 终端用户（不克隆仓库）：`npx -y @norahe/remotion-workflow init`
 - 已有项目：在项目根目录执行同一命令。
 - 新项目：CLI 先创建官方 Remotion 项目，再自动初始化 workflow。
 

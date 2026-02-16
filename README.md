@@ -53,11 +53,12 @@ Notes:
 
 ## 2. Open the non-technical web picker
 
+Open in browser: `https://prompts-mauve.vercel.app/app/`
+
+Local fallback (optional):
 ```bash
 npm run prompts:app
 ```
-
-Open in browser: `http://localhost:4180/app/`
 
 In the app:
 1. Choose source (Official / Community)
@@ -160,7 +161,8 @@ npm run workflow:init
 
 ## Distribution model
 
-- End users (no repo clone): `npx @norahe/remotion-workflow init`
+- End users (no repo clone): `npx -y @norahe/remotion-workflow init`
+- End users (no repo clone): `npx -y @norahe/remotion-workflow init`
 - Existing projects: run the same command in project root.
 - New projects: CLI creates an official Remotion project, then initializes workflow.
 
