@@ -11,7 +11,7 @@
         --line: #e5e5ea;
         --text: #1d1d1f;
         --muted: #6e6e73;
-        --accent: #0071e3;
+        --accent: #ffd84d;
         --accent-soft: #f2f2f7;
       }
       * { box-sizing: border-box; }
@@ -99,11 +99,11 @@
       button[data-copy-ai], #modalCopyAi {
         background: var(--accent);
         border-color: var(--accent);
-        color: #fff;
+        color: #1d1d1f;
       }
       button[data-copy-ai]:hover, #modalCopyAi:hover {
-        background: #0062c4;
-        border-color: #0062c4;
+        background: #ffcf29;
+        border-color: #ffcf29;
       }
       .empty { border: 1px dashed #d2d2d7; border-radius: 16px; color: var(--muted); padding: 20px; background: #fff; }
       .modal { position: fixed; inset: 0; background: rgba(0,0,0,.24); display: none; align-items: center; justify-content: center; padding: 18px; backdrop-filter: blur(8px); }
@@ -130,7 +130,6 @@
         <span class="count" id="count"></span>
       </div>
       <div class="chips" id="sourcePanel"></div>
-      <div class="chips" id="tagPanel"></div>
       <div id="grid" class="grid"></div>
     </div>
 
@@ -152,10 +151,9 @@
     </div>
 
     <script>
-      const state = { items: [], q: '', source: '', tag: '' };
+      const state = { items: [], q: '', source: '' };
       const q = document.getElementById('q');
       const sourcePanel = document.getElementById('sourcePanel');
-      const tagPanel = document.getElementById('tagPanel');
       const grid = document.getElementById('grid');
       const count = document.getElementById('count');
       const modal = document.getElementById('modal');
@@ -227,25 +225,6 @@
       modalClose.addEventListener('click', closeModal);
       modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-      const renderTags = () => {
-        const tagCount = new Map();
-        for (const item of state.items) {
-          for (const t of item.tags || []) tagCount.set(t, (tagCount.get(t) || 0) + 1);
-        }
-        const topTags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
-        tagPanel.innerHTML = [
-          `<button class="chip ${state.tag ? '' : 'active'}" data-tag="">All</button>`,
-          ...topTags.map(([tag, n]) => `<button class="chip ${state.tag === tag ? 'active' : ''}" data-tag="${esc(tag)}">${esc(tag)} (${n})</button>`),
-        ].join('');
-        tagPanel.querySelectorAll('[data-tag]').forEach((el) => {
-          el.addEventListener('click', () => {
-            state.tag = el.getAttribute('data-tag') || '';
-            render();
-            renderTags();
-          });
-        });
-      };
-
       const renderSources = () => {
         sourcePanel.innerHTML = sourceChoices
           .map((s) => `<button class="chip ${state.source === s.value ? 'active' : ''}" data-source="${s.value}">${s.label}</button>`)
@@ -263,10 +242,9 @@
         const term = state.q.trim().toLowerCase();
         const rows = state.items.filter((item) => {
           const bySource = !state.source || sourceOf(item) === state.source;
-          const byTag = !state.tag || (item.tags || []).includes(state.tag);
           const hay = `${item.title} ${(item.tags || []).join(' ')} ${item.prompt}`.toLowerCase();
           const byTerm = !term || hay.includes(term);
-          return bySource && byTag && byTerm;
+          return bySource && byTerm;
         });
 
         count.textContent = `Showing ${rows.length} / ${state.items.length}`;
@@ -288,7 +266,6 @@
                 <button data-preview="${encodeURIComponent(item.id)}">Preview</button>
                 <button data-copy="${encodeURIComponent(item.prompt || '')}">Copy</button>
                 <button data-copy-ai="${encodeURIComponent(item.id)}">Copy AI Template</button>
-                <a class="btn" href="${esc(item.source_url || '#')}" target="_blank" rel="noreferrer">Source</a>
               </div>
             </article>
           `;
@@ -329,7 +306,6 @@
         .then((data) => {
           state.items = data;
           renderSources();
-          renderTags();
           render();
         })
         .catch((err) => {
