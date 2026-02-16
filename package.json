@@ -13,6 +13,7 @@
     "prompts:search": "node scripts/prompts-search.mjs",
     "prompts:sync": "node scripts/prompts-sync.mjs",
     "prompts:sync:since": "node scripts/prompts-sync.mjs --since",
-    "prompts:app": "node scripts/prompts-app.mjs"
+    "prompts:app": "node scripts/prompts-app.mjs",
+    "prompts:open": "node scripts/prompts-app.mjs --open"
   }
 }

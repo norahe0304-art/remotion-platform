@@ -22,6 +22,7 @@ npm run prompts:search -- terminal
 npm run prompts:sync
 npm run prompts:sync:since
 npm run prompts:app
+npm run prompts:open
 ```
 
 ## Sources
@@ -37,6 +38,7 @@ npm run prompts:app
 ## Browser app
 
 - Start: `npm run prompts:app`
+- Start and auto-open browser: `npm run prompts:open`
 - Open: `http://localhost:4180/app/`
 - Features: beginner-friendly 3-step guidance, source/tag filter, keyword search, preview modal, copy prompt, copy AI template, source link.
 
