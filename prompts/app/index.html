@@ -283,7 +283,7 @@
 
         const blankCard = `
           <article class="card">
-            <div class="title">Blank Template</div>
+            <div class="title">Start from scratch</div>
             <div class="meta">Start from scratch</div>
             <div class="tags">
               <span class="tag">best-practices</span>
@@ -291,7 +291,7 @@
             </div>
             <div class="prompt">Copy here to start from scratch with best practices.</div>
             <div class="actions">
-              <button data-copy-blank="1">Copy Blank Template</button>
+              <button data-copy-blank="1">Copy Input Guide</button>
             </div>
           </article>
         `;
@@ -318,7 +318,7 @@
           btn.addEventListener('click', async () => {
             await navigator.clipboard.writeText(buildBlankTemplate());
             btn.textContent = 'Copied';
-            setTimeout(() => (btn.textContent = 'Copy Blank Template'), 900);
+            setTimeout(() => (btn.textContent = 'Copy Input Guide'), 900);
           });
         });
 
