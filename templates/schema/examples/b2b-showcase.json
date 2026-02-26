@@ -1,0 +1,149 @@
+{
+  "id": "b2b-showcase-hero",
+  "name": "B2B Product Showcase",
+  "category": "b2b-showcase",
+  "description": "Professional product showcase with headline, feature highlights, and CTA. Ideal for SaaS landing page hero videos.",
+  "resolution": { "width": 1920, "height": 1080 },
+  "fps": 30,
+
+  "variables": {
+    "headline": {
+      "type": "text",
+      "default": "Ship faster with AI-powered workflows",
+      "label": "Headline",
+      "description": "Main hero headline (max ~60 chars)."
+    },
+    "subline": {
+      "type": "text",
+      "default": "Automate your pipeline from commit to deploy.",
+      "label": "Subline",
+      "description": "Supporting copy below the headline."
+    },
+    "ctaText": {
+      "type": "text",
+      "default": "Start Free Trial",
+      "label": "CTA Button Text"
+    },
+    "primaryColor": {
+      "type": "color",
+      "default": "#0b84f3",
+      "label": "Primary Color"
+    },
+    "backgroundColor": {
+      "type": "color",
+      "default": "#0c0a09",
+      "label": "Background Color"
+    },
+    "logoUrl": {
+      "type": "image",
+      "default": "",
+      "label": "Company Logo",
+      "description": "Square logo, min 200×200px."
+    },
+    "headingFont": {
+      "type": "font",
+      "default": "Inter",
+      "label": "Heading Font"
+    }
+  },
+
+  "scenes": [
+    {
+      "id": "intro",
+      "duration": 60,
+      "animation": "fadeSlideUp",
+      "transition": "fade",
+      "elements": [
+        {
+          "type": "logo",
+          "variable": "logoUrl",
+          "style": { "width": 120, "position": "top-center", "marginTop": 60 },
+          "animation": "springPop"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "duration": 120,
+      "animation": "fadeSlideUp",
+      "transition": "fade",
+      "elements": [
+        {
+          "type": "text",
+          "variable": "headline",
+          "style": { "fontSize": 84, "fontWeight": 700, "textAlign": "center", "color": "#ffffff" },
+          "animation": "fadeSlideUp"
+        },
+        {
+          "type": "text",
+          "variable": "subline",
+          "style": { "fontSize": 34, "textAlign": "center", "color": "#a1a1aa", "marginTop": 24 },
+          "animation": "fadeSlideUp"
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "duration": 90,
+      "transition": "slide-left",
+      "elements": [
+        {
+          "type": "shape",
+          "style": { "type": "pill", "backgroundColor": "#0b84f3", "padding": "16px 48px" },
+          "animation": "springPop"
+        },
+        {
+          "type": "text",
+          "variable": "ctaText",
+          "style": { "fontSize": 28, "fontWeight": 600, "color": "#ffffff", "textAlign": "center" },
+          "animation": "springPop"
+        }
+      ]
+    }
+  ],
+
+  "animations": {
+    "fadeSlideUp": {
+      "type": "spring",
+      "from": { "opacity": 0, "translateY": 28 },
+      "to": { "opacity": 1, "translateY": 0 },
+      "config": { "damping": 18, "stiffness": 120 }
+    },
+    "springPop": {
+      "type": "spring",
+      "from": { "scale": 0.85, "opacity": 0 },
+      "to": { "scale": 1, "opacity": 1 },
+      "config": { "damping": 14, "stiffness": 150 }
+    }
+  },
+
+  "brandPresets": {
+    "default-dark": {
+      "primaryColor": "#0b84f3",
+      "secondaryColor": "#6366f1",
+      "accentColor": "#22d3ee",
+      "backgroundColor": "#0c0a09",
+      "textColor": "#ffffff",
+      "headingFont": "Inter",
+      "bodyFont": "Inter"
+    },
+    "corporate-blue": {
+      "primaryColor": "#1e40af",
+      "secondaryColor": "#3b82f6",
+      "accentColor": "#f59e0b",
+      "backgroundColor": "#0f172a",
+      "textColor": "#f8fafc",
+      "headingFont": "IBM Plex Sans",
+      "bodyFont": "IBM Plex Sans"
+    },
+    "startup-gradient": {
+      "primaryColor": "#8b5cf6",
+      "secondaryColor": "#ec4899",
+      "accentColor": "#06b6d4",
+      "backgroundColor": "#18181b",
+      "textColor": "#fafafa",
+      "headingFont": "Satoshi",
+      "bodyFont": "Inter"
+    }
+  }
+}

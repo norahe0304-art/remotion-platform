@@ -1,0 +1,141 @@
+{
+  "id": "social-ads-promo",
+  "name": "Social Media Ad — Feature Promo",
+  "category": "social-ads",
+  "description": "Short-form vertical ad for Instagram/TikTok featuring a bold hook, feature callout, and CTA overlay.",
+  "resolution": { "width": 1080, "height": 1920 },
+  "fps": 30,
+
+  "variables": {
+    "hookText": {
+      "type": "text",
+      "default": "Still doing this manually?",
+      "label": "Hook Text",
+      "description": "Attention-grabbing opening line."
+    },
+    "featureTitle": {
+      "type": "text",
+      "default": "One-click automation",
+      "label": "Feature Title"
+    },
+    "featureDescription": {
+      "type": "text",
+      "default": "Connect your tools and let AI handle the rest.",
+      "label": "Feature Description"
+    },
+    "ctaText": {
+      "type": "text",
+      "default": "Try it free →",
+      "label": "CTA Text"
+    },
+    "backgroundImage": {
+      "type": "image",
+      "default": "",
+      "label": "Background Image",
+      "description": "Optional background visual (1080×1920)."
+    },
+    "primaryColor": {
+      "type": "color",
+      "default": "#8b5cf6",
+      "label": "Primary Color"
+    },
+    "accentColor": {
+      "type": "color",
+      "default": "#fbbf24",
+      "label": "Accent Color"
+    }
+  },
+
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 45,
+      "transition": "none",
+      "elements": [
+        {
+          "type": "text",
+          "variable": "hookText",
+          "style": { "fontSize": 72, "fontWeight": 800, "textAlign": "center", "color": "#ffffff" },
+          "animation": "slamIn"
+        }
+      ]
+    },
+    {
+      "id": "feature",
+      "duration": 75,
+      "transition": "wipe",
+      "elements": [
+        {
+          "type": "text",
+          "variable": "featureTitle",
+          "style": { "fontSize": 64, "fontWeight": 700, "color": "#ffffff" },
+          "animation": "fadeSlideUp"
+        },
+        {
+          "type": "text",
+          "variable": "featureDescription",
+          "style": { "fontSize": 36, "color": "#d4d4d8", "marginTop": 16 },
+          "animation": "fadeSlideUp"
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "duration": 60,
+      "transition": "zoom",
+      "elements": [
+        {
+          "type": "shape",
+          "style": { "type": "pill", "backgroundColor": "#fbbf24", "padding": "20px 56px" },
+          "animation": "springBounce"
+        },
+        {
+          "type": "text",
+          "variable": "ctaText",
+          "style": { "fontSize": 36, "fontWeight": 700, "color": "#18181b" },
+          "animation": "springBounce"
+        }
+      ]
+    }
+  ],
+
+  "animations": {
+    "slamIn": {
+      "type": "spring",
+      "from": { "scale": 1.8, "opacity": 0 },
+      "to": { "scale": 1, "opacity": 1 },
+      "config": { "damping": 12, "stiffness": 200 }
+    },
+    "fadeSlideUp": {
+      "type": "spring",
+      "from": { "opacity": 0, "translateY": 40 },
+      "to": { "opacity": 1, "translateY": 0 },
+      "config": { "damping": 18, "stiffness": 120 }
+    },
+    "springBounce": {
+      "type": "spring",
+      "from": { "scale": 0, "opacity": 0 },
+      "to": { "scale": 1, "opacity": 1 },
+      "config": { "damping": 10, "stiffness": 180, "mass": 0.8 }
+    }
+  },
+
+  "brandPresets": {
+    "vibrant-purple": {
+      "primaryColor": "#8b5cf6",
+      "accentColor": "#fbbf24",
+      "backgroundColor": "#1e1b4b",
+      "textColor": "#ffffff",
+      "headingFont": "Poppins",
+      "bodyFont": "Inter"
+    },
+    "bold-red": {
+      "primaryColor": "#ef4444",
+      "accentColor": "#ffffff",
+      "backgroundColor": "#18181b",
+      "textColor": "#ffffff",
+      "headingFont": "Montserrat",
+      "bodyFont": "Inter"
+    }
+  }
+}
