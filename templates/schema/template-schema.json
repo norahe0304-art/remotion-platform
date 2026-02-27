@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://remotion-platform.nora.dev/template-schema.json",
+  "title": "Remotion Template Schema",
+  "description": "Schema for B2B-friendly Remotion video templates with variables, brand presets, and reusable animations.",
+  "type": "object",
+  "required": ["id", "name", "category", "description", "variables", "scenes"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique template identifier (kebab-case)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable template name."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["b2b-showcase", "social-ads", "product-launch", "explainer", "testimonial", "event-promo"],
+      "description": "Use-case category for filtering and discovery."
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of what this template produces."
+    },
+    "resolution": {
+      "type": "object",
+      "properties": {
+        "width": { "type": "integer", "default": 1920 },
+        "height": { "type": "integer", "default": 1080 }
+      },
+      "additionalProperties": false
+    },
+    "fps": {
+      "type": "integer",
+      "default": 30
+    },
+    "variables": {
+      "type": "object",
+      "description": "Replaceable variables keyed by name. Each variable declares its type and default value.",
+      "additionalProperties": {
+        "$ref": "#/definitions/variable"
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/scene" },
+      "description": "Ordered list of scenes composing the video."
+    },
+    "animations": {
+      "type": "object",
+      "description": "Reusable animation presets referenced by scenes and elements.",
+      "additionalProperties": {
+        "$ref": "#/definitions/animation"
+      }
+    },
+    "brandPresets": {
+      "type": "object",
+      "description": "One-click brand themes. Each preset overrides variable defaults.",
+      "additionalProperties": {
+        "$ref": "#/definitions/brandPreset"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "variable": {
+      "type": "object",
+      "required": ["type", "default"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["text", "color", "image", "number", "url", "font"],
+          "description": "Variable data type."
+        },
+        "default": {
+          "description": "Default value used when no override is provided."
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable label for UI display."
+        },
+        "description": {
+          "type": "string",
+          "description": "Guidance for the user filling this variable."
+        }
+      },
+      "additionalProperties": false
+    },
+    "scene": {
+      "type": "object",
+      "required": ["id", "duration"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique scene identifier within the template."
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Scene duration in frames."
+        },
+        "animation": {
+          "type": "string",
+          "description": "Reference to a key in the top-level animations object."
+        },
+        "transition": {
+          "type": "string",
+          "enum": ["none", "fade", "slide-left", "slide-right", "wipe", "zoom"],
+          "default": "none",
+          "description": "Transition effect entering this scene."
+        },
+        "elements": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/element" },
+          "description": "Visual elements rendered in this scene."
+        }
+      },
+      "additionalProperties": false
+    },
+    "element": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["text", "image", "shape", "logo", "chart", "video"],
+          "description": "Element kind."
+        },
+        "variable": {
+          "type": "string",
+          "description": "Key referencing a top-level variable for dynamic content."
+        },
+        "style": {
+          "type": "object",
+          "description": "CSS-like style overrides (fontSize, color, position, etc.)."
+        },
+        "animation": {
+          "type": "string",
+          "description": "Reference to a key in the top-level animations object."
+        }
+      },
+      "additionalProperties": true
+    },
+    "animation": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["spring", "interpolate", "sequence"],
+          "description": "Remotion animation primitive."
+        },
+        "ease": {
+          "type": "string",
+          "description": "Easing function name (e.g. 'ease-out', 'ease-in-out')."
+        },
+        "from": {
+          "description": "Start value (number or object of CSS properties)."
+        },
+        "to": {
+          "description": "End value (number or object of CSS properties)."
+        },
+        "config": {
+          "type": "object",
+          "description": "Spring/interpolation config (damping, stiffness, mass, etc.).",
+          "properties": {
+            "damping": { "type": "number" },
+            "stiffness": { "type": "number" },
+            "mass": { "type": "number" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "brandPreset": {
+      "type": "object",
+      "required": ["primaryColor"],
+      "properties": {
+        "primaryColor": { "type": "string", "description": "Primary brand color (hex)." },
+        "secondaryColor": { "type": "string", "description": "Secondary brand color (hex)." },
+        "accentColor": { "type": "string", "description": "Accent/CTA color (hex)." },
+        "backgroundColor": { "type": "string", "description": "Background color (hex)." },
+        "textColor": { "type": "string", "description": "Primary text color (hex)." },
+        "headingFont": { "type": "string", "description": "Heading font family." },
+        "bodyFont": { "type": "string", "description": "Body font family." },
+        "logoUrl": { "type": "string", "description": "URL or path to brand logo." }
+      },
+      "additionalProperties": true
+    }
+  }
+}

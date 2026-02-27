@@ -1,0 +1,225 @@
+{
+  "id": "product-launch-announcement",
+  "name": "Product Launch Announcement",
+  "category": "product-launch",
+  "description": "Multi-scene launch video with logo reveal, feature walkthrough, social proof counter, and closing CTA. Designed for X/LinkedIn posts.",
+  "resolution": { "width": 1920, "height": 1080 },
+  "fps": 30,
+
+  "variables": {
+    "productName": {
+      "type": "text",
+      "default": "Acme Platform",
+      "label": "Product Name"
+    },
+    "tagline": {
+      "type": "text",
+      "default": "The future of team collaboration",
+      "label": "Tagline"
+    },
+    "feature1": {
+      "type": "text",
+      "default": "Real-time multiplayer editing",
+      "label": "Feature 1"
+    },
+    "feature2": {
+      "type": "text",
+      "default": "AI-powered suggestions",
+      "label": "Feature 2"
+    },
+    "feature3": {
+      "type": "text",
+      "default": "Enterprise-grade security",
+      "label": "Feature 3"
+    },
+    "socialProofNumber": {
+      "type": "number",
+      "default": 12000,
+      "label": "Social Proof Count",
+      "description": "Number to animate (e.g. users, stars, downloads)."
+    },
+    "socialProofLabel": {
+      "type": "text",
+      "default": "teams already onboard",
+      "label": "Social Proof Label"
+    },
+    "ctaText": {
+      "type": "text",
+      "default": "Get Early Access",
+      "label": "CTA Text"
+    },
+    "ctaUrl": {
+      "type": "url",
+      "default": "https://example.com",
+      "label": "CTA URL"
+    },
+    "logoUrl": {
+      "type": "image",
+      "default": "",
+      "label": "Product Logo"
+    },
+    "primaryColor": {
+      "type": "color",
+      "default": "#6366f1",
+      "label": "Primary Color"
+    },
+    "backgroundColor": {
+      "type": "color",
+      "default": "#09090b",
+      "label": "Background Color"
+    }
+  },
+
+  "scenes": [
+    {
+      "id": "logo-reveal",
+      "duration": 60,
+      "transition": "fade",
+      "elements": [
+        {
+          "type": "logo",
+          "variable": "logoUrl",
+          "style": { "width": 160, "position": "center" },
+          "animation": "springPop"
+        },
+        {
+          "type": "text",
+          "variable": "productName",
+          "style": { "fontSize": 64, "fontWeight": 700, "color": "#ffffff", "marginTop": 24 },
+          "animation": "fadeSlideUp"
+        }
+      ]
+    },
+    {
+      "id": "tagline",
+      "duration": 75,
+      "transition": "slide-left",
+      "elements": [
+        {
+          "type": "text",
+          "variable": "tagline",
+          "style": { "fontSize": 56, "fontWeight": 600, "color": "#e2e8f0", "textAlign": "center" },
+          "animation": "fadeSlideUp"
+        }
+      ]
+    },
+    {
+      "id": "features",
+      "duration": 120,
+      "transition": "fade",
+      "elements": [
+        {
+          "type": "text",
+          "variable": "feature1",
+          "style": { "fontSize": 40, "color": "#ffffff" },
+          "animation": "staggerSlideUp"
+        },
+        {
+          "type": "text",
+          "variable": "feature2",
+          "style": { "fontSize": 40, "color": "#ffffff" },
+          "animation": "staggerSlideUp"
+        },
+        {
+          "type": "text",
+          "variable": "feature3",
+          "style": { "fontSize": 40, "color": "#ffffff" },
+          "animation": "staggerSlideUp"
+        }
+      ]
+    },
+    {
+      "id": "social-proof",
+      "duration": 90,
+      "transition": "zoom",
+      "elements": [
+        {
+          "type": "chart",
+          "style": { "type": "counter", "fontSize": 96, "fontWeight": 800, "color": "#6366f1" },
+          "animation": "countUp"
+        },
+        {
+          "type": "text",
+          "variable": "socialProofLabel",
+          "style": { "fontSize": 32, "color": "#a1a1aa", "marginTop": 12 },
+          "animation": "fadeSlideUp"
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "duration": 90,
+      "transition": "fade",
+      "elements": [
+        {
+          "type": "shape",
+          "style": { "type": "pill", "backgroundColor": "#6366f1", "padding": "18px 52px" },
+          "animation": "springPop"
+        },
+        {
+          "type": "text",
+          "variable": "ctaText",
+          "style": { "fontSize": 32, "fontWeight": 600, "color": "#ffffff" },
+          "animation": "springPop"
+        }
+      ]
+    }
+  ],
+
+  "animations": {
+    "fadeSlideUp": {
+      "type": "spring",
+      "from": { "opacity": 0, "translateY": 28 },
+      "to": { "opacity": 1, "translateY": 0 },
+      "config": { "damping": 18, "stiffness": 120 }
+    },
+    "springPop": {
+      "type": "spring",
+      "from": { "scale": 0.85, "opacity": 0 },
+      "to": { "scale": 1, "opacity": 1 },
+      "config": { "damping": 14, "stiffness": 150 }
+    },
+    "staggerSlideUp": {
+      "type": "spring",
+      "from": { "opacity": 0, "translateY": 20 },
+      "to": { "opacity": 1, "translateY": 0 },
+      "config": { "damping": 20, "stiffness": 100 }
+    },
+    "countUp": {
+      "type": "interpolate",
+      "from": 0,
+      "to": 1,
+      "ease": "ease-out"
+    }
+  },
+
+  "brandPresets": {
+    "indigo-dark": {
+      "primaryColor": "#6366f1",
+      "secondaryColor": "#818cf8",
+      "accentColor": "#22d3ee",
+      "backgroundColor": "#09090b",
+      "textColor": "#ffffff",
+      "headingFont": "Inter",
+      "bodyFont": "Inter"
+    },
+    "emerald-fresh": {
+      "primaryColor": "#10b981",
+      "secondaryColor": "#34d399",
+      "accentColor": "#fbbf24",
+      "backgroundColor": "#022c22",
+      "textColor": "#ecfdf5",
+      "headingFont": "Plus Jakarta Sans",
+      "bodyFont": "Inter"
+    },
+    "amber-warm": {
+      "primaryColor": "#f59e0b",
+      "secondaryColor": "#fbbf24",
+      "accentColor": "#ffffff",
+      "backgroundColor": "#1c1917",
+      "textColor": "#fef3c7",
+      "headingFont": "Sora",
+      "bodyFont": "Inter"
+    }
+  }
+}

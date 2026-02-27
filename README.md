@@ -50,3 +50,31 @@ Copy prompt -> paste into AI chat -> ask for first draft in your project.
 
 Review timing, audio mix, copy, and visuals.
 Iterate scene by scene, then export final.
+
+## 5) Template Schema (B2B)
+
+The `templates/schema/` directory contains a structured template format designed for B2B video generation.
+
+### Schema overview
+
+Each template JSON file declares:
+- `variables` — replaceable content slots (text, colors, images, fonts) with defaults
+- `scenes` — ordered sequence of timed scenes with elements and transitions
+- `animations` — reusable animation presets (spring, interpolate) referenced by name
+- `brandPresets` — one-click brand themes that override variable defaults
+- `category` — use-case tag: `b2b-showcase`, `social-ads`, `product-launch`, `explainer`, `testimonial`, `event-promo`
+
+### Example templates
+
+| File | Category | Description |
+|------|----------|-------------|
+| `templates/schema/examples/b2b-showcase.json` | b2b-showcase | SaaS hero video with headline, subline, CTA |
+| `templates/schema/examples/social-ads.json` | social-ads | Vertical ad for Instagram/TikTok |
+| `templates/schema/examples/product-launch.json` | product-launch | Multi-scene launch announcement |
+
+### Quick start
+
+1. Copy an example from `templates/schema/examples/`
+2. Replace `variables` defaults with your content
+3. Pick a `brandPresets` entry or define your own
+4. Validate against `templates/schema/template-schema.json`
